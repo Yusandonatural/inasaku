@@ -1,0 +1,1605 @@
+<div id="inasaku-kyokasho">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<span id="top"></span>
+<style>
+#inasaku-kyokasho{
+--green-900:#1f3d2b; --green-700:#2e5d3e; --green-500:#4a8c5c; --green-100:#e7f2e9;
+--earth-700:#6b4f2a; --earth-100:#f4ede0; --gold:#c9a227;
+--ink:#26302a; --sub:#5c6a60; --line:#dbe5dd; --bg:#f7f9f6; --card:#ffffff;
+}
+#inasaku-kyokasho *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+#inasaku-kyokasho{
+font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",Meiryo,sans-serif;
+background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+#inasaku-kyokasho .app-head{
+background:linear-gradient(135deg,var(--green-900) 0%,var(--green-700) 70%,#3c6e4c 100%);
+color:#fff; padding:24px 20px 20px; text-align:center;
+}
+#inasaku-kyokasho .app-head h1{font-size:1.3rem; letter-spacing:.06em; font-weight:700;}
+#inasaku-kyokasho .app-head p{font-size:.8rem; opacity:.85; margin-top:6px; letter-spacing:.04em;}
+#inasaku-kyokasho .wrap{max-width:860px; margin:0 auto; padding:16px 12px 60px;}
+#inasaku-kyokasho .card{
+background:var(--card); border:1px solid var(--line); border-radius:14px;
+padding:18px 16px; margin-top:16px; box-shadow:0 1px 3px rgba(31,61,43,.06);
+}
+#inasaku-kyokasho .card h2{
+font-size:1rem; color:var(--green-700); letter-spacing:.05em; margin-bottom:12px;
+padding-left:10px; border-left:4px solid var(--green-500);
+}
+#inasaku-kyokasho .flabel{font-size:.82rem; font-weight:700; color:var(--sub); margin:16px 0 7px; letter-spacing:.05em;}
+#inasaku-kyokasho .flabel:first-of-type{margin-top:2px;}
+#inasaku-kyokasho .flabel .picked{color:var(--green-700); margin-left:8px; font-size:.85rem;}
+#inasaku-kyokasho /* chips */
+.chips{display:flex; flex-wrap:wrap; gap:7px;}
+#inasaku-kyokasho .chip{
+border:1.5px solid var(--line); background:#fff; color:var(--ink);
+border-radius:22px; padding:8px 14px; font-size:.88rem; cursor:pointer; user-select:none;
+transition:background .1s,border-color .1s;
+}
+#inasaku-kyokasho .chip.sm{padding:7px 0; font-size:.85rem; text-align:center; border-radius:9px;}
+#inasaku-kyokasho .chip.on{background:var(--green-700); border-color:var(--green-700); color:#fff; font-weight:700;}
+#inasaku-kyokasho .chips.grid12{display:grid; grid-template-columns:repeat(6,1fr);}
+#inasaku-kyokasho .chips.grid7{display:grid; grid-template-columns:repeat(7,1fr);}
+#inasaku-kyokasho .chips.grid5{display:grid; grid-template-columns:repeat(5,1fr);}
+@media(max-width:480px){ #inasaku-kyokasho .chips.grid12{grid-template-columns:repeat(4,1fr);} }
+#inasaku-kyokasho .datebar{
+background:var(--green-100); border-radius:10px; padding:10px 14px; margin-bottom:10px;
+font-size:1.05rem; font-weight:800; color:var(--green-900); letter-spacing:.02em;
+}
+#inasaku-kyokasho .varinfo{
+background:var(--green-100); border-radius:10px; padding:12px 14px; margin-top:14px;
+font-size:.86rem; color:var(--green-900); line-height:1.8;
+}
+#inasaku-kyokasho .varinfo b.vt{font-size:.95rem;}
+#inasaku-kyokasho .varinfo .setbtn{
+display:inline-block; margin-top:8px; border:1.5px solid var(--green-700); background:#fff;
+color:var(--green-700); border-radius:9px; padding:8px 14px; font-size:.85rem; font-weight:700;
+cursor:pointer; user-select:none;
+}
+#inasaku-kyokasho .varinfo .setbtn:active{background:var(--green-100);}
+#inasaku-kyokasho /* stepper */
+.stepper{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+#inasaku-kyokasho .stepbtn{
+border:1.5px solid var(--green-500); background:#fff; color:var(--green-700);
+border-radius:9px; padding:9px 13px; font-size:.95rem; font-weight:800; cursor:pointer; user-select:none;
+}
+#inasaku-kyokasho .stepbtn:active{background:var(--green-100);}
+#inasaku-kyokasho .stepval{
+min-width:110px; text-align:center; font-size:1.15rem; font-weight:800; color:var(--green-900);
+background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:8px 10px;
+}
+#inasaku-kyokasho .btn{
+display:inline-block; border:none; cursor:pointer; font-size:.95rem; font-weight:700;
+border-radius:10px; padding:12px 22px; letter-spacing:.05em; user-select:none;
+}
+#inasaku-kyokasho .btn:active{opacity:.75;}
+#inasaku-kyokasho .btn-main{background:var(--green-700); color:#fff; width:100%; margin-top:20px; font-size:1.05rem;}
+#inasaku-kyokasho .btn-sub{background:#fff; color:var(--green-700); border:1.5px solid var(--green-500); padding:9px 16px; font-size:.85rem;}
+#inasaku-kyokasho .btn-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;}
+#inasaku-kyokasho .hidden{display:none;}
+#inasaku-kyokasho .summary{
+background:var(--green-100); border-radius:10px; padding:12px 14px; font-size:.86rem;
+color:var(--green-900); margin-bottom:12px;
+}
+#inasaku-kyokasho .summary strong{font-size:.95rem;}
+#inasaku-kyokasho .workload{
+background:var(--earth-100); border-radius:10px; padding:12px 14px; font-size:.84rem;
+color:var(--earth-700); margin-bottom:16px;
+}
+#inasaku-kyokasho .workload b{display:block; margin-bottom:4px; letter-spacing:.04em;}
+#inasaku-kyokasho /* timeline */
+.tl{list-style:none;}
+#inasaku-kyokasho .tl li{position:relative; padding:0 0 22px 32px; border-left:2.5px solid var(--line); margin-left:12px;}
+#inasaku-kyokasho .tl li:last-child{border-left-color:transparent; padding-bottom:4px;}
+#inasaku-kyokasho .tl li::before{
+content:""; position:absolute; left:-9px; top:2px; width:15px; height:15px; border-radius:50%;
+background:var(--green-500); border:3px solid #fff; box-shadow:0 0 0 2px var(--green-500);
+}
+#inasaku-kyokasho .tl li.milestone::before{background:var(--gold); box-shadow:0 0 0 2px var(--gold);}
+#inasaku-kyokasho .tl li.planting::before{background:var(--green-900); box-shadow:0 0 0 2px var(--green-900);}
+#inasaku-kyokasho .tl .date{font-size:1.02rem; font-weight:800; color:var(--green-900); letter-spacing:.02em;}
+#inasaku-kyokasho .tl .date small{font-weight:600; color:var(--sub); font-size:.75rem; margin-left:6px;}
+#inasaku-kyokasho .tl .name{font-size:1rem; font-weight:700; margin-top:1px;}
+#inasaku-kyokasho .tl .name .tag{
+display:inline-block; font-size:.68rem; font-weight:700; color:#fff; background:var(--green-500);
+border-radius:20px; padding:1px 9px; margin-left:8px; vertical-align:2px; letter-spacing:.05em;
+}
+#inasaku-kyokasho .tl li.milestone .tag{background:var(--gold);}
+#inasaku-kyokasho .tl li.planting .tag{background:var(--green-900);}
+#inasaku-kyokasho .tl .note{
+font-size:.82rem; color:var(--sub); margin-top:5px; background:#f2f6f2;
+border-radius:8px; padding:8px 11px;
+}
+#inasaku-kyokasho .adjust{display:inline-flex; align-items:center; gap:6px; margin-top:7px; font-size:.78rem; color:var(--sub);}
+#inasaku-kyokasho .adjust .stepbtn{padding:4px 11px; font-size:.9rem; border-radius:7px;}
+#inasaku-kyokasho .adjust .val{font-weight:800; color:var(--green-900); min-width:52px; text-align:center; font-size:.9rem;}
+#inasaku-kyokasho .footnote{font-size:.75rem; color:var(--sub); margin-top:16px; line-height:1.7;}
+@media print{
+#inasaku-kyokasho .app-head{background:var(--green-900) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+#inasaku-kyokasho .no-print{display:none !important;}
+#inasaku-kyokasho .card{box-shadow:none; border-color:#bbb; break-inside:avoid;}
+#inasaku-kyokasho{background:#fff;}
+}
+#inasaku-kyokasho{
+--green-900:#1f3d2b; --green-700:#2e5d3e; --green-500:#4a8c5c; --green-100:#e7f2e9;
+--earth-700:#6b4f2a; --earth-100:#f4ede0; --gold:#c9a227;
+--ink:#26302a; --sub:#5c6a60; --line:#dbe5dd; --bg:#f7f9f6; --card:#ffffff;
+}
+#inasaku-kyokasho *{box-sizing:border-box; margin:0; padding:0;}
+#inasaku-kyokasho{
+font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",Meiryo,sans-serif;
+background:var(--bg); color:var(--ink); line-height:1.85; -webkit-font-smoothing:antialiased;
+}
+#inasaku-kyokasho .app-head{
+background:linear-gradient(135deg,var(--green-900) 0%,var(--green-700) 70%,#3c6e4c 100%);
+color:#fff; padding:28px 20px 24px; text-align:center;
+}
+#inasaku-kyokasho .app-head h1{font-size:1.35rem; letter-spacing:.08em; font-weight:700;}
+#inasaku-kyokasho .app-head p{font-size:.82rem; opacity:.88; margin-top:8px; letter-spacing:.04em;}
+#inasaku-kyokasho .wrap{max-width:820px; margin:0 auto; padding:18px 14px 70px;}
+#inasaku-kyokasho /* 目次 */
+.toc{
+background:var(--card); border:1px solid var(--line); border-radius:14px;
+padding:18px 16px; margin-top:16px;
+}
+#inasaku-kyokasho .toc h2{font-size:.95rem; color:var(--green-700); letter-spacing:.06em; margin-bottom:10px;}
+#inasaku-kyokasho .toc ol{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:4px 14px;}
+@media(max-width:520px){#inasaku-kyokasho .toc ol{grid-template-columns:1fr;}}
+#inasaku-kyokasho .toc a{
+display:block; color:var(--green-900); text-decoration:none; font-size:.9rem;
+padding:7px 10px; border-radius:8px; background:var(--green-100);
+}
+#inasaku-kyokasho .toc a .num{color:var(--green-500); font-weight:800; margin-right:7px; font-size:.8rem;}
+#inasaku-kyokasho .toc a.subitem{margin-left:18px; background:#f0f6f1; font-size:.85rem;}
+#inasaku-kyokasho /* 工程セクション */
+section.step{
+background:var(--card); border:1px solid var(--line); border-radius:14px;
+padding:22px 20px; margin-top:18px; scroll-margin-top:12px;
+}
+#inasaku-kyokasho section.step h2{
+font-size:1.15rem; color:var(--green-900); letter-spacing:.05em;
+display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+#inasaku-kyokasho .stepnum{
+flex:none; width:34px; height:34px; border-radius:50%; background:var(--green-700); color:#fff;
+display:inline-flex; align-items:center; justify-content:center; font-size:.95rem; font-weight:800;
+}
+#inasaku-kyokasho .season{
+font-size:.72rem; font-weight:700; color:var(--green-700); background:var(--green-100);
+border-radius:20px; padding:3px 12px; letter-spacing:.05em;
+}
+#inasaku-kyokasho section.step h3{
+font-size:.88rem; color:var(--green-700); margin:16px 0 4px; letter-spacing:.05em;
+padding-left:9px; border-left:3.5px solid var(--green-500);
+}
+#inasaku-kyokasho section.step p{font-size:.92rem; margin-top:6px;}
+#inasaku-kyokasho .point{
+background:var(--green-100); border-radius:10px; padding:12px 15px; margin-top:14px;
+font-size:.88rem; color:var(--green-900);
+}
+#inasaku-kyokasho .point b{display:block; font-size:.8rem; letter-spacing:.08em; margin-bottom:4px; color:var(--green-700);}
+#inasaku-kyokasho .caution{
+background:var(--earth-100); border-radius:10px; padding:12px 15px; margin-top:10px;
+font-size:.86rem; color:var(--earth-700);
+}
+#inasaku-kyokasho .caution b{display:block; font-size:.8rem; letter-spacing:.08em; margin-bottom:4px;}
+#inasaku-kyokasho .grouphead{
+margin-top:26px; padding:14px 18px; background:var(--green-700); color:#fff;
+border-radius:14px; font-size:1.05rem; font-weight:700; letter-spacing:.06em;
+}
+#inasaku-kyokasho .grouphead small{display:block; font-size:.78rem; font-weight:400; opacity:.9; margin-top:3px;}
+#inasaku-kyokasho .totop{display:block; text-align:right; margin-top:14px; font-size:.78rem;}
+#inasaku-kyokasho .totop a{color:var(--green-500); text-decoration:none;}
+#inasaku-kyokasho .app-foot{
+text-align:center; font-size:.75rem; color:var(--sub); padding:26px 14px 40px; line-height:1.8;
+}
+@media print{
+#inasaku-kyokasho .app-head{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+#inasaku-kyokasho section.step{break-inside:avoid; box-shadow:none;}
+#inasaku-kyokasho .toc, #inasaku-kyokasho .totop{display:none;}
+#inasaku-kyokasho{background:#fff;}
+}
+#inasaku-kyokasho /* ===== 統合サイト追加スタイル ===== */
+.sitenav{
+position:sticky; top:0; z-index:50; background:rgba(247,249,246,.95);
+backdrop-filter:blur(4px); border-bottom:1px solid var(--line);
+display:flex; gap:6px; overflow-x:auto; padding:9px 10px; -webkit-overflow-scrolling:touch;
+}
+#inasaku-kyokasho .sitenav a{
+flex:none; text-decoration:none; font-size:.82rem; font-weight:700; color:var(--green-900);
+background:var(--green-100); border-radius:20px; padding:7px 14px; letter-spacing:.03em;
+}
+#inasaku-kyokasho .hero{
+background:var(--card); border:1px solid var(--line); border-radius:14px;
+padding:24px 20px; margin-top:18px; scroll-margin-top:60px;
+}
+#inasaku-kyokasho .hero h2{font-size:1.2rem; color:var(--green-900); letter-spacing:.05em; margin-bottom:10px;}
+#inasaku-kyokasho .hero p{font-size:.92rem; margin-top:10px;}
+#inasaku-kyokasho .rules{margin-top:16px; display:grid; gap:10px;}
+#inasaku-kyokasho .rule{
+display:flex; gap:12px; align-items:flex-start; background:var(--green-100);
+border-radius:10px; padding:12px 14px;
+}
+#inasaku-kyokasho .rule .rn{
+flex:none; width:30px; height:30px; border-radius:50%; background:var(--green-700); color:#fff;
+display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; margin-top:2px;
+}
+#inasaku-kyokasho .rule b{display:block; font-size:.92rem; color:var(--green-900);}
+#inasaku-kyokasho .rule span{font-size:.84rem; color:var(--sub);}
+#inasaku-kyokasho .prep h3, #inasaku-kyokasho .fail h3{
+font-size:.95rem; color:var(--green-700); margin:18px 0 6px; letter-spacing:.05em;
+padding-left:9px; border-left:3.5px solid var(--green-500);
+}
+#inasaku-kyokasho .prep p, #inasaku-kyokasho .fail p{font-size:.9rem; margin-top:6px;}
+#inasaku-kyokasho .toolrow{
+width:100%; border-collapse:collapse; font-size:.85rem; margin-top:8px;
+}
+#inasaku-kyokasho .toolrow th, #inasaku-kyokasho .toolrow td{border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top;}
+#inasaku-kyokasho .toolrow th{background:var(--green-100); color:var(--green-900); font-size:.8rem; white-space:nowrap;}
+#inasaku-kyokasho .failcard{
+border:1px solid var(--line); border-left:5px solid var(--gold); border-radius:10px;
+padding:14px 16px; margin-top:12px; background:#fff;
+}
+#inasaku-kyokasho .failcard b.t{display:block; font-size:.95rem; color:var(--earth-700);}
+#inasaku-kyokasho .failcard .why{font-size:.85rem; color:var(--sub); margin-top:4px;}
+#inasaku-kyokasho .failcard .fix{
+font-size:.86rem; color:var(--green-900); background:var(--green-100);
+border-radius:8px; padding:9px 12px; margin-top:8px;
+}
+#inasaku-kyokasho .failcard .fix b{color:var(--green-700); font-size:.78rem; letter-spacing:.08em; display:block; margin-bottom:3px;}
+#inasaku-kyokasho .secanchor{scroll-margin-top:60px;}
+#inasaku-kyokasho .lead-note{font-size:.8rem; color:var(--sub); margin-top:10px;}
+#inasaku-kyokasho .weedcard{
+border:1px solid var(--line); border-left:5px solid var(--green-500); border-radius:10px;
+padding:14px 16px; margin-top:12px; background:#fff;
+}
+#inasaku-kyokasho .weedcard b.t{font-size:.98rem; color:var(--green-900);}
+#inasaku-kyokasho .weedcard .wtag{
+display:inline-block; font-size:.68rem; font-weight:700; border-radius:20px;
+padding:2px 10px; margin-left:8px; vertical-align:2px; letter-spacing:.04em;
+}
+#inasaku-kyokasho .wtag.annual{background:var(--green-100); color:var(--green-700);}
+#inasaku-kyokasho .wtag.perennial{background:var(--earth-100); color:var(--earth-700);}
+#inasaku-kyokasho .weedcard .feat{font-size:.85rem; color:var(--sub); margin-top:5px;}
+#inasaku-kyokasho .weedcard .ctrl{
+font-size:.86rem; color:var(--green-900); background:var(--green-100);
+border-radius:8px; padding:9px 12px; margin-top:8px;
+}
+#inasaku-kyokasho .weedcard .ctrl b{color:var(--green-700); font-size:.78rem; letter-spacing:.08em; display:block; margin-bottom:3px;}
+#inasaku-kyokasho{background:#f7f9f6; font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",Meiryo,sans-serif; line-height:1.65; color:#26302a;}
+</style>
+<div class="app-head">
+<p style="font-size:.85rem; opacity:.9; letter-spacing:.2em; margin-bottom:6px;">自然栽培の米作り</p>
+<h1>一年目の教科書</h1>
+<p>農薬・化学肥料・除草剤を使わずに、全くの初心者でも一年目から収穫までたどり着くための道しるべ</p>
+</div>
+<nav class="sitenav">
+<a href="#hajimeni">はじめに</a>
+<a href="#junbi">準備編</a>
+<a href="#tool">工程表をつくる</a>
+<a href="#hinshu">品種選び</a>
+<a href="#kaisetsu">工程の解説</a>
+<a href="#zassou">雑草と防除</a>
+<a href="#shippai">失敗と対策</a>
+<a href="#merumaga">メルマガ登録</a>
+</nav>
+<div class="wrap">
+<!-- ============ はじめに ============ -->
+<section class="hero secanchor" id="hajimeni">
+<h2>一年目から、ちゃんとお米は穫れます</h2>
+<p>「無農薬・無肥料の米づくりは難しい」と言われます。けれど実際には、失敗の原因のほとんどは知識ではなく<b>段取り</b>です。いつ・何を・なぜやるのかがあらかじめ分かっていて、除草の初動さえ逃さなければ、初めての年でも収穫までたどり着けます。</p>
+<p>このサイトは、田植え日を決めるとあなたの田んぼ専用の作業暦がその場でできあがり、それぞれの作業のやり方とつまずきどころを一つずつ確認できるようにつくられています。</p>
+<div class="rules">
+<div class="rule"><div class="rn">1</div><div><b>小さく始める</b><span>一年目は1畝(30坪)〜1反まで。小さな田で全工程を一巡りする経験が、何よりの教科書になります。</span></div></div>
+<div class="rule"><div class="rn">2</div><div><b>田を平らに、水を深く</b><span>代かきの均平と深水管理(5〜7cm)で、雑草の大半は生える前に抑えられます。</span></div></div>
+<div class="rule"><div class="rn">3</div><div><b>除草は「見える前」に</b><span>草が見えてからでは遅い。田植え後3日からのチェーン除草で、見えない芽のうちに絶やします。</span></div></div>
+<div class="rule"><div class="rn">4</div><div><b>出穂日を記録する</b><span>収穫適期は出穂から40〜45日。この一つの記録が、稲刈りの失敗を防ぎます。</span></div></div>
+<div class="rule"><div class="rn">5</div><div><b>一人でやらない</b><span>水利や畔のことは地域の先輩が一番の先生。困る前に聞く人を見つけておきましょう。</span></div></div>
+</div>
+</section>
+<!-- ============ 準備編 ============ -->
+<section class="hero prep secanchor" id="junbi">
+<h2>準備編 ― 始める前にそろえること</h2>
+<h3>田んぼを見つける</h3>
+<p>市町村の農業委員会・農地バンク、JA、そして地域の知り合いづてが主な入口です。初心者が最優先で確認すべきは<b>水</b>。水路から自由に入水・排水できるか、日当たりは良いか、前の耕作者が除草剤や肥料をどれくらい使っていたかを聞いておきましょう(自然栽培への切り替え1〜2年目は地力が安定しないことがあります)。通いやすさも大切です。除草期の6月は週2〜3回田に行くことになります。</p>
+<h3>面積の決め方</h3>
+<p>初めての年は<b>1畝(約100㎡)〜1反(10アール)</b>がおすすめです。1反で穫れるお米はおよそ4〜6俵(240〜360kg)。ご家族が一年に食べる量としては十分すぎるほどです。「もっと広く」は二年目からで間に合います。</p>
+<h3>そろえる道具と費用の目安</h3>
+<table class="toolrow">
+<tr><th>最低限そろえる</th><td>長靴(田植え用の田靴)・鎌・スコップ・チェーン除草具(単管とチェーンで自作可、3千〜1万円)・田車(中古5千円〜、新品2〜3万円)・刈払機(3〜5万円)</td></tr>
+<tr><th>借りる・頼む</th><td>トラクター(耕運・代かき)、田植機、コンバインと乾燥は、機械を持つ近隣農家さんやJAへの作業委託が現実的。1反あたり合計2〜4万円程度が相場です。</td></tr>
+<tr><th>苗</th><td>一年目は育苗まで自分でやるか、自然栽培仲間から苗を分けてもらうかの二択。自信がなければ苗は譲ってもらい、二年目から塩水選・薄まき育苗に挑戦するのも良い順序です。</td></tr>
+</table>
+<p class="lead-note">※ 手植え・手刈り(はざ掛け)なら1畝規模で機械なしでも可能です。体験としては最高ですが、1反を超えるなら機械の力を借りましょう。</p>
+<h3>年間の時間の目安(1反・機械委託の場合)</h3>
+<p>もみまき〜育苗の世話で数日、田植え1日、6月の除草が週1〜2回×1時間半を1か月半、畔草刈りが月1回、水見が週2〜3回×15分、稲刈り1日。<b>勝負どころは6月の除草だけ</b>で、あとは「見に行く」ことが仕事の大半です。</p>
+</section>
+<!-- ============ 工程表ツール ============ -->
+<div class="grouphead secanchor" id="tool">あなたの田んぼの作業暦をつくる
+<small>最寄りのアメダス観測地点・品種・田植え日・面積を選ぶと、その地点の実測気温をもとに、もみまきから稲刈りまでの予定日が自動で並びます。できた工程表は印刷したり、スマホのカレンダーに取り込んだりできます。</small>
+</div>
+<!-- 入力 -->
+<section class="card no-print" id="formCard">
+<h2>ほ場の情報を入力(タップで選択)</h2>
+<div class="flabel">観測地点(気象データ連動) <span class="picked" id="wxBadge">未設定</span></div>
+<div class="wxbox">
+<div class="wxsearch">
+<input type="search" id="wxQ" class="wxinput" placeholder="市町村名や地点名で探す(例:京田辺)" autocomplete="off">
+<button class="btn btn-sub wxgo" id="wxGoBtn">探す</button>
+</div>
+<button class="btn btn-sub wxgeo" id="geoBtn">📍 いまいる場所から探す</button>
+<div class="wxlist" id="wxList"></div>
+<div class="wxinfo" id="wxInfo"></div>
+<details class="wxfall">
+<summary>一覧から選ぶ(都道府県別)</summary>
+<div class="wxsels">
+<select class="wxsel" id="wxPref"><option value="">都道府県</option></select>
+<select class="wxsel" id="wxStn"><option value="">地点</option></select>
+</div>
+</details>
+</div>
+<div class="fitbox" id="fitBox"></div>
+<div class="flabel">品種 <span class="picked">★=自然栽培向き</span></div>
+<div class="chips" id="varietyChips"></div>
+<div id="maturityBox" class="hidden">
+<div class="flabel">熟期タイプ(その他の品種の場合)</div>
+<div class="chips" id="maturityChips"></div>
+</div>
+<div class="varinfo" id="varInfo"></div>
+<div class="flabel">田植え日</div>
+<div class="dateline">
+<input type="date" id="dateInput" class="dateinput">
+<button type="button" class="stepbtn dnudge" data-dd="-7">−7日</button>
+<button type="button" class="stepbtn dnudge" data-dd="7">＋7日</button>
+</div>
+<div class="datebar" id="dateDisplay"></div>
+<button type="button" class="btn btn-sub recbtn" id="setRecBtn2">この地点のおすすめの田植え日にする</button>
+<div class="flabel">実施面積 <span class="picked" id="areaNote"></span></div>
+<div class="stepper">
+<button class="stepbtn" data-d="-10">−10</button>
+<button class="stepbtn" data-d="-1">−1</button>
+<div class="stepval" id="areaVal"></div>
+<button class="stepbtn" data-d="1">＋1</button>
+<button class="stepbtn" data-d="10">＋10</button>
+</div>
+<div class="chips" id="unitChips" style="margin-top:8px"></div>
+<button class="btn btn-main" id="makeBtn">作業工程を表示する</button>
+</section>
+<!-- 結果 -->
+<section class="card hidden" id="resultCard">
+<h2>作業工程表</h2>
+<div class="summary" id="summaryBox"></div>
+<div class="workload" id="workloadBox"></div>
+<ul class="tl" id="timeline"></ul>
+<div class="btn-row no-print">
+<button class="btn btn-sub" id="printBtn">🖨 印刷 / PDF保存</button>
+<button class="btn btn-sub" id="icsBtn">📅 カレンダーに保存(.ics)</button>
+<button class="btn btn-sub" id="resetBtn">↺ 日数を標準に戻す</button>
+</div>
+<p class="footnote">
+※ 表示日数はあくまで目安です。各作業の「−日/＋日」ボタンで、ほ場の様子に合わせて微調整できます(日付は自動で再計算されます)。<br>
+※ 除草は雑草が見えてからでは遅く、<b>発芽初期(糸状期)</b>に行うのが自然栽培の要です。チェーン除草は7日おきに2〜3回繰り返すと効果が高まります。<br>
+※ 出穂・収穫日は品種・気象条件により前後します。収穫適期は出穂後の積算気温(日平均気温の積算)が目安で、早生950〜1,000℃・中生1,000〜1,050℃・晩生1,050〜1,100℃(籾の黄化率85〜90%)とされています。<br>
+※ 観測地点を選ぶと、その地点の過去5年の日平均気温の実測値から、田植え適期・出穂・収穫の日付を計算し直します。気象データが取得できない場合は都道府県別の標準カレンダーで表示します。<br>
+※ 地点データ:気象庁「地点データ」/ 気温データ:<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>(ERA5再解析、観測地点の緯度経度・標高で取得)。いずれも実測の目安であり、ほ場の観察を優先してください。
+</p>
+</section>
+<!-- ============ 品種選び ============ -->
+<section class="hero prep secanchor" id="hinshu">
+<h2>自然栽培に向いている品種一覧</h2>
+<p>肥料を入れない田では、「肥料を効かせて多収する」ために育種された現代品種より、<b>少ない養分でも自力で根を張る昔ながらの系統</b>が力を発揮します。在来種・固定種なら自家採種ができ、毎年種を採り続けるほどあなたの田に適応した稲になっていきます。工程表の品種選びで★が付いているのが、ここで紹介する品種です。</p>
+<h3>自然栽培の定番品種</h3>
+<table class="toolrow">
+<tr><th>朝日(旭)<br>晩生</th><td>岡山生まれの在来系。無肥料でも収量が安定し、西日本の自然栽培で最も定番。あっさりと上品な食味で、コシヒカリ系とは別系統の味わいです。</td></tr>
+<tr><th>亀の尾<br>中生</th><td>明治生まれの在来種で、コシヒカリ・ササニシキの祖先にあたります。冷えに強く東日本向き。酒米としても人気で、自然酒の蔵元からの引き合いもあります。</td></tr>
+<tr><th>イセヒカリ<br>晩生</th><td>伊勢神宮の御田で見出された強健種。茎が太く倒伏や病気に強いため、初めての自然栽培でも扱いやすい品種です。</td></tr>
+<tr><th>ササシグレ<br>中生</th><td>ササニシキの親品種。少ない養分でよく育ち、あっさり系の澄んだ食味。自然栽培ファンの支持が厚い品種です。</td></tr>
+<tr><th>ハツシモ<br>晩生</th><td>岐阜の大粒種。草勢が強く倒れにくい、晩生の安心株。冷めてもおいしく、おにぎりや寿司向き。</td></tr>
+<tr><th>農林22号・農林48号</th><td>化学肥料が普及する前に育成された系統で、少肥適性が高い。多くの現代品種の祖先でもあり、「自然栽培の隠れた名品種」と呼ばれます。</td></tr>
+<tr><th>ハッピーヒル<br>中生</th><td>自然農法の提唱者・福岡正信さんが育成した品種。強健で穂が大きく、無肥料でも多収が狙えます。</td></tr>
+<tr><th>ササニシキ<br>中生</th><td>あっさりした食味の代表格。肥料を効かせると倒れやすい品種ですが、無肥料ではむしろ健全に育ちます。和食・寿司との相性は抜群。</td></tr>
+<tr><th>黒米・赤米(古代米)<br>晩生</th><td>野生の強さを残した最も強健な稲。やせた田でもよく育ち、彩り米として販売単価も高いため、小面積の副作物にも向きます。</td></tr>
+</table>
+<h3>選び方のヒント</h3>
+<p>迷ったら<b>「地域で実績のある品種」×「種籾・苗が手に入るか」</b>で決めましょう。西日本なら朝日・イセヒカリ・ヒノヒカリ、東日本なら亀の尾・ササシグレ・ひとめぼれあたりが入口になります。コシヒカリも「無肥料だと倒れにくくなる」ため自然栽培での実績は豊富です。種籾や苗は、近くの自然栽培生産者や自然栽培の種苗ネットワークから譲り受けるのが確実で、その土地に馴染んだ種が手に入ります。そして収穫したら、一番よく実った株から来年の種を採ること。自家採種こそ自然栽培の品種選びの完成形です。</p>
+</section>
+<!-- ============ 工程解説 ============ -->
+<div class="grouphead secanchor" id="kaisetsu">全工程の解説
+<small>工程表に出てくる作業の「やり方」と「自然栽培のポイント」を、作業の順にまとめました。</small>
+</div>
+<nav class="toc">
+<h2>作業工程一覧(クリックで各解説へ)</h2>
+<ol>
+<li><a href="#tsuchifurui"><span class="num">1</span>土篩い(つちふるい)</a></li>
+<li><a href="#momimaki"><span class="num">2</span>もみまき(播種)</a></li>
+<li><a href="#kounn"><span class="num">3</span>耕運</a></li>
+<li><a href="#shirokaki"><span class="num">4</span>しろかき(代かき)</a></li>
+<li><a href="#taue"><span class="num">5</span>田植え</a></li>
+<li><a href="#josou"><span class="num">6</span>除草(全体の考え方)</a></li>
+<li><a class="subitem" href="#chain"><span class="num">6-1</span>チェーン除草</a></li>
+<li><a class="subitem" href="#taguruma"><span class="num">6-2</span>田車(たぐるま)</a></li>
+<li><a class="subitem" href="#chuko"><span class="num">6-3</span>中耕除草</a></li>
+<li><a class="subitem" href="#tetori"><span class="num">6-4</span>手作業(手取り除草)</a></li>
+<li><a href="#azekusa"><span class="num">7</span>畔草刈り</a></li>
+<li><a href="#nakaboshi"><span class="num">8</span>中干し</a></li>
+<li><a href="#shussui"><span class="num">9</span>出穂(しゅっすい)</a></li>
+<li><a href="#mizukanri"><span class="num">10</span>出穂後の水管理</a></li>
+<li><a href="#inekari"><span class="num">11</span>稲刈り</a></li>
+<li><a href="#akiokoshi"><span class="num">12</span>秋起こし</a></li>
+</ol>
+</nav>
+<section class="step" id="tsuchifurui">
+<h2><span class="stepnum">1</span>土篩い(つちふるい)<span class="season">冬〜早春</span></h2>
+<h3>どんな作業?</h3>
+<p>育苗箱に使う土(培土)を篩(ふるい)にかけ、石や草の根、わらくずを取り除いて、粒のそろったやわらかい土に仕上げる作業です。苗づくりの土台をつくる、一年の米づくりの最初の仕事です。</p>
+<h3>やり方</h3>
+<p>網目5mm前後の篩で土をふるい、床土(とこつち)用と覆土(ふくど)用に分けて確保します。土はよく乾かしてから篩うと目詰まりせず、さらさらと仕上がります。育苗箱1箱あたり床土・覆土あわせて4〜5kgほど必要です。</p>
+<div class="point"><b>自然栽培のポイント</b>市販の肥料入り培土は使わず、自分の田や近くの山の無肥料の土を使います。土そのものの力で育った苗は、根が強く、田植え後の活着が違います。前年のうちに土を確保し、雨の当たらない場所で乾かしておくと冬の作業が楽になります。</div>
+<div class="caution"><b>注意</b>除草剤や肥料が使われた可能性のある場所の土は避けること。雑草の種が多い表土ではなく、少し下の層の土を使うと育苗箱の雑草が減ります。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="momimaki">
+<h2><span class="stepnum">2</span>もみまき(播種)<span class="season">田植えの約30日前</span></h2>
+<h3>どんな作業?</h3>
+<p>選別した種籾を育苗箱にまき、苗を育て始める作業です。「苗半作(なえはんさく)」と言われるとおり、米づくりの半分は苗で決まります。</p>
+<h3>やり方</h3>
+<p>まず塩水選(えんすいせん)で軽い籾を除き、充実した種籾だけを選びます。その後3〜7日ほど浸種して芽出しをし、育苗箱にまいて覆土します。</p>
+<div class="point"><b>自然栽培のポイント</b>薄まき(1箱あたり乾籾60〜80g)が鉄則です。密にまくとひょろ長い弱い苗になりますが、薄くまけば1本1本が太く、がっしりした成苗に育ちます。プール育苗にすると水管理が楽で、病気にも強くなります。種は自家採種を続けるほど、その田に合った強い稲になっていきます。</div>
+<div class="caution"><b>注意</b>浸種は冷たい水でゆっくりと(水温×日数の積算で100℃が目安)。急な高温はむら発芽のもとになります。水は毎日入れ替えましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="kounn">
+<h2><span class="stepnum">3</span>耕運<span class="season">早春〜田植え前</span></h2>
+<h3>どんな作業?</h3>
+<p>トラクターなどで田を耕し、前年の稲わらや刈り草を土に混ぜ込みながら、土をやわらかくほぐす作業です。</p>
+<h3>やり方</h3>
+<p>稲わらは秋〜冬のうちに土に還しておくと、田植えまでに十分分解が進みます。春の耕運は入水の2週間以上前までに済ませ、わらの分解ガスが苗を傷めないようにします。</p>
+<div class="point"><b>自然栽培のポイント</b>深く耕しすぎないこと。耕深は10〜15cm程度の浅耕とし、微生物やミミズが暮らす土の層構造をなるべく壊さないようにします。肥料を入れない代わりに、稲わらと草を土に還すことが地力の源になります。</div>
+<div class="caution"><b>注意</b>未分解のわらが多いまま入水すると、ガス湧きで根が傷みます。わらの状態を見て耕運の時期を決めましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="shirokaki">
+<h2><span class="stepnum">4</span>しろかき(代かき)<span class="season">田植えの3〜7日前</span></h2>
+<h3>どんな作業?</h3>
+<p>田に水を入れて土をかき混ぜ、トロトロの状態にして表面を平らにならす作業です。水持ちを良くし、苗を植えやすくします。</p>
+<h3>やり方</h3>
+<p>荒代(あらじろ)と植え代(うえじろ)の2回に分けて行うのが基本です。荒代で土を大まかにかき混ぜて雑草を発芽させ、植え代でその芽を練り込んでから田植えをすると、雑草を一世代減らせます。</p>
+<div class="point"><b>自然栽培のポイント</b>除草剤を使わない栽培では、代かきの「均平(きんぺい)」が除草の第一歩です。田面が平らであれば水深が揃い、深水管理で雑草を均一に抑えられます。高低差が5cmあるだけで、高い所から一斉に草が生えてきます。丁寧すぎるほど丁寧に、が合言葉です。</div>
+<div class="caution"><b>注意</b>かき混ぜすぎると土の粒子が細かくなりすぎて酸素不足になり、根張りが悪くなります。「浅く、平らに」を心がけましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="taue">
+<h2><span class="stepnum">5</span>田植え<span class="season">5月下旬〜6月中旬(地域による)</span></h2>
+<h3>どんな作業?</h3>
+<p>育てた苗を田に植える、一年で最も大切な節目の作業です。ここからの日数を基準に、除草や水管理の予定が決まっていきます。</p>
+<h3>やり方</h3>
+<p>葉齢4〜5葉まで育てた成苗を、1株2〜3本という少ない本数で、坪40〜50株の疎植(そしょく)にします。植え付けは浅植えを基本とし、深植えは分げつを遅らせるので避けます。</p>
+<div class="point"><b>自然栽培のポイント</b>疎植にすると株の間を風と光が通り、病気や虫に強くなります。肥料がない分、稲は自分の根で養分を探しに行き、太い根を張ります。「密に植えて肥料で育てる」の逆、「まばらに植えて根で育てる」が自然栽培の田植えです。</div>
+<div class="caution"><b>注意</b>田植え直後から雑草との競争が始まります。植えたらすぐに深水(5〜7cm)にして、雑草の発芽を抑えましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<div class="grouphead" id="josou">6. 除草 ― 自然栽培の要
+<small>除草剤を使わない米づくりでは、雑草が「見えてから取る」のではなく「見える前に絶やす」のが鉄則です。雑草の発芽初期(糸状期)に田面を撹拌すれば、小さな芽は浮いて枯れます。チェーン→田車→中耕除草機→手取りと、時期に応じて道具を使い分け、深水管理と組み合わせて雑草を抑えます。</small>
+</div>
+<section class="step" id="chain">
+<h2><span class="stepnum">6-1</span>チェーン除草<span class="season">田植え後2〜5日から、7日おきに2〜3回</span></h2>
+<h3>どんな作業?</h3>
+<p>ロープにチェーンを吊るした道具を田面に沈め、人が引いて歩くことで表土をかき混ぜ、発芽したばかりの雑草を浮かせて枯らす除草法です。</p>
+<h3>やり方</h3>
+<p>雑草がまだ目に見えない「糸状期」に行うのが最大のコツです。田植えの2〜5日後に1回目、その後7日おきに2〜3回繰り返します。苗の上を通しても、活着した苗は倒れてもすぐ起き上がるので心配いりません。</p>
+<div class="point"><b>自然栽培のポイント</b>1回の作業は10アールあたり30分ほどと軽く、初期除草として最も効率的です。深水管理と組み合わせると効果が倍増します。「草が見えないうちにやる」――見えてからでは遅い、を徹底しましょう。</div>
+<div class="caution"><b>注意</b>活着前(田植え直後1〜2日)の苗は抜けやすいので、田の様子を見て開始日を決めること。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="taguruma">
+<h2><span class="stepnum">6-2</span>田車(たぐるま)<span class="season">田植え後8〜12日ごろ</span></h2>
+<h3>どんな作業?</h3>
+<p>回転爪のついた手押しの除草具を条間(じょうかん・株の列の間)に押して歩き、土を撹拌して雑草を浮かせる、昔ながらの除草法です。</p>
+<h3>やり方</h3>
+<p>条に沿ってまっすぐ押し進めます。往復しながら全ての条間を通すため、10アールあたり2〜3時間が目安です。土をコロコロと転がすように、一定のリズムで押すのがコツです。</p>
+<div class="point"><b>自然栽培のポイント</b>田車は除草と同時に土に酸素を送り込む「中耕」の効果があり、稲の根張りがぐんと良くなります。除草のためだけでなく、稲を元気にするための作業と考えると、この時間が惜しくなくなります。</div>
+<div class="caution"><b>注意</b>株間(株と株の間)の草は田車では取れません。後日の手取り除草で補います。田植えの条間を揃えておくと作業が格段に楽です。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="chuko">
+<h2><span class="stepnum">6-3</span>中耕除草<span class="season">田植え後13〜18日ごろ</span></h2>
+<h3>どんな作業?</h3>
+<p>エンジン付きの水田中耕除草機(歩行型・乗用型)で条間の土を撹拌し、残った雑草を除きながら土に酸素を入れる作業です。</p>
+<h3>やり方</h3>
+<p>チェーン・田車で抑えきれなかった雑草が対象です。除草爪が土を数センチの深さでかき回し、雑草を根ごと浮かせます。歩行型で10アールあたり1〜1.5時間、乗用型なら30分ほどです。</p>
+<div class="point"><b>自然栽培のポイント</b>この時期の中耕は、分げつ最盛期の稲に酸素を届ける追い風になります。「除草した田は稲の色が変わる」と言われるほど。ここまでの3段階(チェーン→田車→中耕)で雑草の主力を断てれば、あとは手取りだけで夏を越せます。</div>
+<div class="caution"><b>注意</b>稲の根が条間に広がり始める時期なので、遅すぎる中耕は根を切ってしまいます。田植え後3週間までを目安に終えましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="tetori">
+<h2><span class="stepnum">6-4</span>手作業(手取り除草)<span class="season">6月〜7月 随時</span></h2>
+<h3>どんな作業?</h3>
+<p>機械や道具で取りきれなかった株間の雑草を、田に入って手で抜く作業です。自然栽培の米づくりで最も地道で、最も確実な除草です。</p>
+<h3>やり方</h3>
+<p>コナギ・ヒエ・オモダカなどを、根ごと抜いて泥に深く押し込むか、田の外に持ち出します。特にヒエは稲に似ているので、葉の付け根(稲には毛がある)で見分けます。</p>
+<div class="point"><b>自然栽培のポイント</b>「今年の一株が来年の千株」。雑草は種を落とす前に取ることが、翌年の除草を楽にする一番の近道です。田を歩くこと自体が稲の観察になり、生育の変化や虫の様子に気づけます。手取りは除草であると同時に、田との対話の時間です。</div>
+<div class="caution"><b>注意</b>夏の炎天下の作業は朝夕の涼しい時間帯に。熱中症対策を忘れずに。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="azekusa">
+<h2><span class="stepnum">7</span>畔草刈り<span class="season">5月〜9月に数回</span></h2>
+<h3>どんな作業?</h3>
+<p>田を囲む畔(あぜ)の草を刈る作業です。風通しを良くし、畔の点検を兼ねながら、シーズン中に数回行います。</p>
+<h3>やり方</h3>
+<p>刈払機で畔の内側・上面・外側を刈ります。刈った草は畔に敷いておくと畔の乾燥と崩れを防ぎ、やがて土に還ります。</p>
+<div class="point"><b>自然栽培のポイント</b>丸刈りにせず少し高さを残す「高刈り」にすると、カエルやクモなど稲の虫を食べてくれる生きものの住みかが残ります。畔は害虫の発生源ではなく、天敵の供給源。刈りすぎないことも技術のうちです。</div>
+<div class="caution"><b>注意</b>出穂の直前〜出穂期に畔草を刈ると、草にいたカメムシが一斉に稲穂へ移動し、斑点米の原因になります。出穂の2週間前までに刈り終えるか、出穂中は刈らないこと。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="nakaboshi">
+<h2><span class="stepnum">8</span>中干し<span class="season">田植え後40〜50日ごろ</span></h2>
+<h3>どんな作業?</h3>
+<p>田の水を一度抜いて土を軽く乾かし、稲の生育を切り替える水管理です。無駄な分げつを止め、根を深く張らせます。</p>
+<h3>やり方</h3>
+<p>目標の茎数(1株20本前後)に達したころに落水し、田面に軽くヒビが入る程度まで7〜10日乾かします。その後は間断かん水(水を入れては自然に減らす繰り返し)に移ります。</p>
+<div class="point"><b>自然栽培のポイント</b>自然栽培では「軽め」の中干しが基本です。強く乾かすと土の生きものが打撃を受け、せっかくの土の力が損なわれます。もともと疎植・無肥料の稲は過剰分げつになりにくいため、田の生きものを守る目的で中干しをしない(または田の一部に水たまりを残す)選択をする生産者もいます。</div>
+<div class="caution"><b>注意</b>幼穂(ようすい)ができ始めてからの強い乾燥は収量に直結します。中干しは幼穂形成期の前に終えること。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="shussui">
+<h2><span class="stepnum">9</span>出穂(しゅっすい)<span class="season">田植え後65〜82日ごろ(品種による)</span></h2>
+<h3>どんな作業?</h3>
+<p>茎の中で育った穂が外に出てくる、稲の一生で最大の節目です。穂が出た日の午前中に開花し、2時間ほどで受粉が終わります。田の半分で穂が出た日を「出穂日」と呼び、ここから収穫日を数えます。</p>
+<h3>この時期にすること</h3>
+<p>出穂前後2週間は稲が最も水を必要とする時期です。「花水(はなみず)」と呼ばれるたっぷりの水を切らさないようにします。作業としては見回りが中心で、田に入る作業はしません。</p>
+<div class="point"><b>自然栽培のポイント</b>出穂日を記録しておきましょう。収穫適期は「出穂からの積算温度約1,000℃(おおむね40〜45日)」で決まるため、出穂日がわかれば稲刈りの日がほぼ読めます。朝の田で一斉に開く籾の花は、一年でこの時期だけの風景です。</div>
+<div class="caution"><b>注意</b>開花中(午前中)は田に入ったり水を大きく動かしたりしないこと。受粉を妨げると不稔(実らない籾)の原因になります。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="mizukanri">
+<h2><span class="stepnum">10</span>出穂後の水管理<span class="season">出穂〜稲刈り10日前</span></h2>
+<h3>どんな作業?</h3>
+<p>穂に養分を送り込む登熟(とうじゅく)期間の水管理です。この1か月あまりの管理が、米の粒の充実と食味を決めます。</p>
+<h3>やり方</h3>
+<p>出穂後2週間はたっぷりの水を保ち、その後は間断かん水に切り替えます。水を入れて2〜3日で自然に減るのを待ち、また入れる――この繰り返しで、根に水と酸素を交互に届けます。稲刈りの約10日前に最後の落水をします。</p>
+<div class="point"><b>自然栽培のポイント</b>「早すぎる落水は米を痩せさせる」。登熟後半まで根を生かし続けることが、粒張りの良い、味の乗った米につながります。無肥料の稲は根の力で登熟するため、慣行栽培より落水を遅らせ気味にするのがコツです。</div>
+<div class="caution"><b>注意</b>コンバインで刈る場合は田が十分乾いている必要があります。水はけの悪い田は落水をやや早めるなど、田ごとに加減しましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="inekari">
+<h2><span class="stepnum">11</span>稲刈り<span class="season">出穂後40〜45日ごろ</span></h2>
+<h3>どんな作業?</h3>
+<p>実った稲を刈り取る、一年の集大成の作業です。刈るタイミングの見極めが、米の味と品質を最後に左右します。</p>
+<h3>やり方</h3>
+<p>穂全体の8〜9割の籾が黄金色になり、穂の根元にわずかに緑が残るころが適期です。早刈りは未熟米(青米)が増え、刈り遅れは胴割れや食味低下のもと。コンバインで刈って乾燥機にかけるか、バインダーで刈ってはざ掛けにします。</p>
+<div class="point"><b>自然栽培のポイント</b>時間が許すなら天日干し(はざ掛け)を。逆さに吊るされた稲は、わらに残った養分を最後まで籾に送り込みながら、太陽と風でゆっくり乾きます。機械乾燥では出せない味の深みが生まれます。乾燥後の籾は水分15%前後を目安に。来年の種籾は、この中から一番よく実った株を選んで取り分けておきましょう。</div>
+<div class="caution"><b>注意</b>刈り取り前の台風・長雨で倒伏した稲は早めに刈ること。濡れたまま放置すると穂発芽してしまいます。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<section class="step" id="akiokoshi">
+<h2><span class="stepnum">12</span>秋起こし<span class="season">稲刈り後2〜4週間(10月〜11月)</span></h2>
+<h3>どんな作業?</h3>
+<p>稲刈りの終わった田を秋のうちに耕し、稲わらや刈り草を土にすき込む作業です。一年の締めくくりであると同時に、翌年の米づくりの始まりでもあります。</p>
+<h3>やり方</h3>
+<p>コンバインで刈った場合は、細かく裁断されたわらを田全体に均一に広げてから、10cm程度の浅耕でざっくりとすき込みます。わらが乾いてから、田が乾いているうちに行うのがコツです。寒くなる前に済ませると、冬の間に微生物がわらをゆっくり分解してくれます。</p>
+<div class="point"><b>自然栽培のポイント</b>肥料を入れない米づくりでは、わらと草を土に還すこの作業こそが地力の源です。秋にすき込んでおけば春までに分解が進み、春すき込みで起こりがちなガス湧き(未分解のわらが発酵して根を傷める現象)を防げます。「秋起こしまでが今年の米づくり」と考えましょう。</div>
+<div class="caution"><b>注意</b>湿った田で耕すと土が練れて構造が壊れます。田が乾いた日を選ぶこと。雪の多い地域は初雪前に済ませましょう。</div>
+<p class="totop"><a href="#top">▲ 目次へ戻る</a></p>
+</section>
+<!-- ============ 雑草図鑑 ============ -->
+<section class="hero prep secanchor" id="zassou">
+<h2>田んぼの雑草図鑑と防除方法</h2>
+<p>除草剤を使わない防除の基本は、どの草にも共通の<b>「予防の三点セット」</b>です。①代かきの均平、②深水管理(5〜7cm)、③発芽初期の撹拌除草(チェーン→田車→中耕の7日間隔)。この3つで雑草の8割は抑えられます。残り2割は草の性質に合わせて対処します。一年草は「種を落とさせない」、塊茎(球根)で増える多年草は「秋起こしで塊茎を弱らせる」が原則です。</p>
+<h3>除草方法一覧</h3>
+<table class="toolrow">
+<tr><th>深水管理(予防)</th><td>田植え直後から水深5〜7cmを保ち、コナギ・ヒエの発芽自体を抑えます。毎日の水見だけでできる、すべての除草の土台です。</td></tr>
+<tr><th>チェーン除草</th><td>田植え後2〜10日、7日間隔で2回。まだ見えない糸状期の芽を浮かせて枯らします。約30分/10a。単管+チェーンで自作可(3千〜1万円)。</td></tr>
+<tr><th>田車(たぐるま)</th><td>田植え後2〜3週目。条間の育ち始めた草を撹拌して浮かせます。2〜3時間/10a。中古5千円〜。中耕効果で根張りも良くなります。</td></tr>
+<tr><th>中耕除草機</th><td>田植え後3〜4週目の仕上げ。条間を整えながら土に酸素を入れます。歩行型で1〜1.5時間/10a。レンタルや共同利用も。</td></tr>
+<tr><th>手取り除草</th><td>6〜7月に随時。株間と取り残しに対する、最も地道で最も確実な方法。道具は鎌一本。種を落とす前に抜くのが鉄則です。</td></tr>
+<tr><th>秋起こし(翌年の予防)</th><td>収穫後に耕して塊茎雑草を冬の寒さにさらし、わらを分解。翌年の草の量を確実に減らす「来年のための除草」です。</td></tr>
+</table>
+<p class="lead-note">※ 基本は「深水+チェーン→田車→中耕+手取り」の組み合わせです。ほ場の条件や労力に応じて足し引きしてください。</p>
+<div class="weedcard">
+<b class="t">コナギ</b><span class="wtag annual">一年草・種子</span>
+<div class="feat">ハート形のつやのある葉。水田雑草の最強手で、田植え直後から一斉に発芽し、放置すると田一面を覆って稲の養分を奪います。無農薬栽培の失敗原因の第1位です。</div>
+<div class="ctrl"><b>防除方法</b>発芽初期(糸状期)はわずかな撹拌で浮いて枯れるため、チェーン除草の初回(田植え後2〜5日)が最大の防除機会。深水にも弱いので、深水+7日間隔の撹拌で徹底的に。取り残しは8月の開花前までに手取りし、種を落とさせないこと。</div>
+</div>
+<div class="weedcard">
+<b class="t">ノビエ(タイヌビエなど)</b><span class="wtag annual">一年草・種子</span>
+<div class="feat">稲そっくりのイネ科雑草。見分け方は葉の付け根――稲には葉耳(ようじ)と毛がありますが、ヒエにはありません。株元が扁平で白っぽいのも目印です。</div>
+<div class="ctrl"><b>防除方法</b>浅水・干上がりで発芽が進むため、深水管理が最も効きます。条間は田車・中耕除草で取れますが、株間に残ったものは手取りで。穂が出たら種がこぼれる前に必ず抜き取り、田の外へ。1本で数千粒の種を落とします。</div>
+</div>
+<div class="weedcard">
+<b class="t">オモダカ</b><span class="wtag perennial">多年草・塊茎</span>
+<div class="feat">矢じり形の葉が特徴。土中の塊茎(小さな球根)から芽を出すため体力があり、撹拌除草だけでは倒しきれません。夏に白い三弁の花を咲かせます。</div>
+<div class="ctrl"><b>防除方法</b>見つけ次第、塊茎ごと手で抜き取るのが基本。葉だけちぎっても再生します。秋起こしで塊茎を地表近くに掘り出し、冬の乾燥と凍結にさらすと年々減っていきます。数年がかりで根絶するつもりで。</div>
+</div>
+<div class="weedcard">
+<b class="t">イヌホタルイ</b><span class="wtag perennial">多年草・種子+塊茎</span>
+<div class="feat">針のような細い茎が株立ちになるカヤツリグサ科の草。種子と塊茎の両方で増え、代かき後すぐに発芽してきます。</div>
+<div class="ctrl"><b>防除方法</b>発芽初期は撹拌除草がよく効くので、チェーン除草の7日間隔を守ることが第一。育ってしまった株は塊茎ごと手取りで。深水との組み合わせで発芽自体を減らせます。</div>
+</div>
+<div class="weedcard">
+<b class="t">クログワイ</b><span class="wtag perennial">多年草・塊茎</span>
+<div class="feat">マツバイに似た細い管状の茎が伸びる難防除雑草。土の深い所(10〜20cm)の塊茎から次々に芽を出すため、撹拌除草がほとんど効きません。</div>
+<div class="ctrl"><b>防除方法</b>一年での根絶は難しく、連年の対策で塊茎の数を減らします。毎年の秋起こしで塊茎を掘り上げて冬にさらすこと、シーズン中は見つけ次第抜くことの積み重ねが唯一の道。多発田では中干しをしっかり入れて塊茎の形成を抑えるのも有効です。</div>
+</div>
+<div class="weedcard">
+<b class="t">ウリカワ</b><span class="wtag perennial">多年草・塊茎</span>
+<div class="feat">細長いヘラ形の葉がロゼット状に広がるオモダカ科の草。小さな塊茎から発生し、匍匐枝で横に増えていきます。</div>
+<div class="ctrl"><b>防除方法</b>発生初期の撹拌除草+手取りで対応。オモダカ同様、秋起こしによる塊茎の掘り上げが翌年の発生を減らします。深水で発芽勢いを弱められます。</div>
+</div>
+<div class="weedcard">
+<b class="t">セリ</b><span class="wtag perennial">多年草・匍匐茎</span>
+<div class="feat">香りの良い山菜としても知られますが、田では畔際から匍匐茎(ランナー)を伸ばして侵入してきます。</div>
+<div class="ctrl"><b>防除方法</b>侵入口である畔際の管理が第一。畔草刈りのついでに田の縁を見回り、伸びてきた匍匐茎を手で引き抜きます。田の中まで広がる前の早期対応が肝心です。</div>
+</div>
+<div class="weedcard">
+<b class="t">アオミドロ・表層藻類</b><span class="wtag annual">藻類</span>
+<div class="feat">水面や水中に繁茂する糸状の藻。日射の強い年に多発し、小さな苗にまとわりついて倒したり、光を遮ったりします。厳密には雑草ではありませんが初年度によく悩まされます。</div>
+<div class="ctrl"><b>防除方法</b>大発生したら一度水を落として乾かすか、新しい水に入れ替えます。竹ぼうきや熊手でからめ取るのも有効。苗が大きくなれば負けなくなるので、育苗でがっしりした成苗を植えることが一番の予防です。</div>
+</div>
+<p class="lead-note">※ 雑草の顔ぶれは田んぼごとに違います。一年目に「どの草が多い田か」を観察して記録しておくと、二年目からの対策が的確になります。雑草は敵であると同時に、その田の土の状態を教えてくれる指標でもあります。</p>
+</section>
+<!-- ============ 失敗と対策 ============ -->
+<section class="hero fail secanchor" id="shippai">
+<h2>一年目のつまずきトップ5と回避法</h2>
+<p>先輩たちが一年目に実際にやってしまった失敗は、ほぼこの5つに集約されます。逆に言えば、これだけ避ければ収穫までたどり着けます。</p>
+<div class="failcard">
+<b class="t">1. 気づいたら田が草だらけ(最多の失敗)</b>
+<div class="why">「草が生えたら取ろう」と構えていると、見えたときには手遅れ。コナギは一面に発芽してからでは取り切れません。</div>
+<div class="fix"><b>回避法</b>除草はカレンダーで先に日程を決めてしまうこと。田植え後3日・10日・15日の3回は、草が見えなくても必ず田に入る。「見えないうちにやる」が唯一の対策です。</div>
+</div>
+<div class="failcard">
+<b class="t">2. 深植え・密植で稲が育たない</b>
+<div class="why">不安から苗をたくさん深く植えると、分げつが進まず、風が通らずに病気も出やすくなります。</div>
+<div class="fix"><b>回避法</b>1株2〜3本・浅植え・坪40〜50株の疎植を信じる。植えた直後は頼りなく見えますが、7月には見違えます。</div>
+</div>
+<div class="failcard">
+<b class="t">3. 田が平らでなく、水が効かない</b>
+<div class="why">高低差があると高い場所だけ水が浅くなり、そこから一斉に草が生えます。深水しても水面から島が出る状態です。</div>
+<div class="fix"><b>回避法</b>代かき委託時に「均平を丁寧に」とお願いする。植え代のあとトンボで高い所をならすだけでも違います。均平は除草剤の代わりだと考えましょう。</div>
+</div>
+<div class="failcard">
+<b class="t">4. 水管理の失敗(切らす・抜くのが早い)</b>
+<div class="why">出穂前後に水を切らすと不稔に、収穫前に早く落水しすぎると米が痩せます。</div>
+<div class="fix"><b>回避法</b>出穂前後2週間は絶対に水を切らさない。落水は稲刈りの10日前。この2つの日付を工程表からカレンダーに入れておきましょう。</div>
+</div>
+<div class="failcard">
+<b class="t">5. 稲刈りの時期を逃す</b>
+<div class="why">「まだ青いから」と待ちすぎて胴割れ・食味低下、または台風で倒伏してから慌てるパターンです。</div>
+<div class="fix"><b>回避法</b>出穂日をメモし、40日目から田に通って籾の色を見る(8〜9割黄化が合図)。コンバインを頼む場合は出穂日が分かった時点で予約を入れておくこと。</div>
+</div>
+<p style="margin-top:18px">最後にもう一度。<b>一年目の成果は「収量」ではなく「収穫までたどり着くこと」</b>です。自分の田で穫れた一杯のごはんの味は、何にも代えがたいものです。二年目はその経験が、必ずもっと良い米にしてくれます。</p>
+</section>
+<!-- ============ メルマガ登録 ============ -->
+<section class="hero secanchor" id="merumaga">
+<h2>メルマガ登録</h2>
+<p>季節ごとの作業のタイミングや、除草・水管理のコツ、自然栽培の田んぼの様子を、メールでお届けします。お名前とメールアドレスをご登録ください。</p>
+<div style="margin-top:14px; border:1px solid var(--line); border-radius:10px; overflow:hidden;">
+<iframe src="https://form.jotform.com/262227783365060" style="width:100%;height:539px;border:none;" title="メルマガ登録フォーム"></iframe>
+</div>
+<p class="lead-note">※ フォームが表示されない場合は<a href="https://form.jotform.com/262227783365060" style="color:var(--green-700);">こちらの登録ページ</a>からご登録いただけます。</p>
+</section>
+<!-- ============ 免責事項 ============ -->
+<section class="hero secanchor" id="menseki" style="padding:18px 20px;">
+<h2 style="font-size:1rem;">免責事項</h2>
+<p style="font-size:.8rem; color:var(--sub); line-height:1.9; margin-top:8px;">
+本サイトに掲載している作業時期・日数・出穂予定日・収穫予定日・収量・費用などの数値は、一般的な知見に基づく<b>目安</b>であり、その正確性・完全性を保証するものではありません。実際の生育は、地域・ほ場の条件・品種・種子の由来・その年の気象などによって大きく変動します。作業の実施にあたっては、ご自身のほ場の観察を最優先とし、必要に応じて地域の農業普及指導センター・JA・経験ある生産者などにもご相談ください。<br><br>
+本サイトの情報を利用したことにより生じたいかなる損害(収量の減少、品質の低下、資材・機械に関する損失、その他の不利益を含みます)についても、当サイト運営者は一切の責任を負いかねます。また、掲載内容は予告なく変更されることがあります。<br><br>
+メルマガ登録でお預かりしたお名前・メールアドレスは、メールマガジンの配信および関連するご案内の目的にのみ使用し、ご本人の同意なく第三者に提供することはありません。配信の停止は、メールに記載の方法またはお問い合わせにより、いつでも可能です。
+</p>
+</section>
+</div>
+<div class="app-foot">
+自然栽培の米作り 一年目の教科書 ― 農薬・化学肥料・除草剤を使わない米づくりの道しるべ<br>
+時期・日数・費用はいずれも目安です。地域・品種・その年の気候に合わせてご調整ください。<br>
+<a href="#menseki" style="color:var(--green-500);">免責事項</a>
+</div>
+<script>
+(function(){
+/* ====== マスタデータ ====== */
+const MATURITY = {
+early:{label:"早生", heading:65,  harvest:105, sense:0.1, idealShift:-18, eat:900,  acc:980,  senseLabel:"感温性(温度で出穂が決まる)"},
+mid:  {label:"中生", heading:75,  harvest:120, sense:0.4, idealShift:0,   eat:980,  acc:1050, senseLabel:"中間型(温度と日長の両方)"},
+late: {label:"晩生", heading:82,  harvest:130, sense:0.8, idealShift:10,  eat:1300, acc:1000, senseLabel:"感光性(日の長さで出穂が決まる)"},
+};
+/* d:[移植→出穂の有効積算(基準10℃), 出穂後積算, 耐冷性, 高温登熟性, いもち病, 穂発芽性, 耐倒伏性]
+   5=強/難 4=やや強 3=中 2=やや弱/やや易 1=弱/易 0=データなし
+   積算温度は京都市・移植6/10の12品種実測から算出。特性は農研機構イネ品種DB・各県特性表。 */
+const VARIETIES = [
+{id:"gohyakugawa", name:"五百川",         type:"early", d:[780,0,0,0,0,0,0]},
+{id:"akitakomachi",name:"あきたこまち",   type:"early", d:[890,953,3,0,4,4,3]},
+{id:"yumepirika",  name:"ゆめぴりか",     type:"early", d:[0,0,4,0,2,0,0]},
+{id:"nanatsuboshi",name:"ななつぼし",     type:"early", d:[0,0,0,0,0,0,0]},
+{id:"kinuhikari",  name:"キヌヒカリ",     type:"early", d:[982,1120,0,0,1,1,1]},
+{id:"koshiibuki",  name:"こしいぶき",     type:"early", d:[0,0,0,0,0,0,0]},
+{id:"himenomochi", name:"ヒメノモチ(もち)", type:"early", d:[945,1155,5,0,5,1,3]},
+{id:"koshihikari", name:"コシヒカリ",     type:"mid",   d:[982,1120,0,1,1,5,1]},
+{id:"hitomebore",  name:"ひとめぼれ",     type:"mid",   d:[945,917,0,0,2,5,2]},
+{id:"sasanishiki", nat:true, name:"ササニシキ",     type:"mid", d:[0,0,1,0,1,0,1]},
+{id:"sasashigure", nat:true, name:"ササシグレ",     type:"mid", d:[0,0,0,0,1,0,1]},
+{id:"milkyqueen",  name:"ミルキークイーン", type:"mid", d:[982,1052,0,0,1,5,1]},
+{id:"tsuyahime",   name:"つや姫",         type:"mid",   d:[0,0,3,4,5,0,4]},
+{id:"haenuki",     name:"はえぬき",       type:"mid",   d:[945,966,0,0,3,3,5]},
+{id:"yukiwakamaru",name:"雪若丸",         type:"mid",   d:[945,966,4,4,5,0,5]},
+{id:"seiten",      name:"青天の霹靂",     type:"mid",   d:[0,0,5,0,5,0,4]},
+{id:"shinnosuke",  name:"新之助",         type:"late",  d:[0,1075,0,0,2,0,0]},
+{id:"kamenoo", nat:true,     name:"亀の尾",         type:"mid",  d:[0,0,0,0,0,0,1]},
+{id:"norin48", nat:true,     name:"農林48号",       type:"mid",  d:[0,0,0,0,0,0,0]},
+{id:"happyhill", nat:true,   name:"ハッピーヒル",   type:"mid",  d:[0,0,0,0,0,0,0]},
+{id:"koganemochi", name:"こがねもち(もち)", type:"mid", d:[816,1017,0,0,1,1,1]},
+{id:"hinohikari",  name:"ヒノヒカリ",     type:"late",  d:[1318,1002,0,0,2,2,2]},
+{id:"nikomaru",    name:"にこまる",       type:"late",  d:[1335,994,0,5,2,3,3]},
+{id:"kinumusume",  name:"きぬむすめ",     type:"late",  d:[1250,896,0,1,3,0,5]},
+{id:"sagabiyori",  name:"さがびより",     type:"late",  d:[1388,0,0,3,1,2,5]},
+{id:"hatsushimo", nat:true,  name:"ハツシモ",       type:"late", d:[0,0,0,0,1,0,1]},
+{id:"asahi", nat:true,       name:"朝日(旭)",      type:"late", d:[0,0,0,0,0,0,2]},
+{id:"isehikari", nat:true,   name:"イセヒカリ",     type:"late", d:[0,0,0,0,0,0,5]},
+{id:"norin22", nat:true,     name:"農林22号",       type:"late", d:[0,0,0,0,0,0,0]},
+{id:"kodaimai", nat:true,    name:"黒米・赤米(古代米)", type:"late", d:[0,0,0,0,0,0,0]},
+{id:"custom",      name:"その他",         type:"mid",   d:[0,0,0,0,0,0,0]},
+];
+function vd(v,i){ return (v && v.d && v.d[i]) ? v.d[i] : 0; }
+function vEat(v,M){ return vd(v,0) || M.eat; }
+function vAcc(v,M){ return vd(v,1) || M.acc; }
+/* ====== 状態 ====== */
+const now = new Date();
+const state = {
+pref:"奈良",
+terrain:"flat",
+variety:"isehikari",
+maturity:"mid",
+year: (new Date(now.getFullYear(),5,10) < now) ? now.getFullYear()+1 : now.getFullYear(),
+month:6, day:10,
+area:10, unit:"a",
+};
+/* ====== ユーティリティ ====== */
+const $ = id => document.getElementById(id);
+const WD = ["日","月","火","水","木","金","土"];
+function baseDate(){ return new Date(state.year, state.month-1, state.day); }
+function addDays(n){ const d = baseDate(); d.setDate(d.getDate()+n); return d; }
+function fmt(dt){ return `${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日(${WD[dt.getDay()]})`; }
+function fmtICS(dt){ const p=n=>String(n).padStart(2,"0"); return `${dt.getFullYear()}${p(dt.getMonth()+1)}${p(dt.getDate())}`; }
+function daysInMonth(y,m){ return new Date(y, m, 0).getDate(); }
+function areaInA(){ return state.unit==="tan" ? state.area*10 : state.unit==="ha" ? state.area*100 : state.area; }
+function round1(x){ return Math.round(x*10)/10; }
+function makeChips(containerId, items, selectedId, onPick, cls){
+const box = $(containerId);
+box.innerHTML = "";
+items.forEach(it=>{
+const c = document.createElement("div");
+c.className = "chip" + (cls?(" "+cls):"") + (it.id===selectedId ? " on":"");
+c.textContent = it.label;
+c.addEventListener("click", ()=>onPick(it.id));
+box.appendChild(c);
+});
+}
+
+/* ====== アメダス地点マスタ + 気象データ連動 ====== */
+/* 地点データ出典: 気象庁「地点データ」(観測所番号・地点名・緯度経度・標高) */
+const STN_URL = "/pages/amedas-chiten-data";
+const HOKKAIDO_BR = new Set(["宗谷","上川","留萌","石狩","空知","後志","オホーツク","根室","釧路","十勝","胆振","日高","渡島","檜山"]);
+let STN = {}, STN_ALL = [], stnReady = false;
+function parseStn(txt){
+const o = {};
+txt.split("~").forEach(function(blk){
+const i = blk.indexOf("|"); if(i<0) return;
+const p = blk.slice(0,i);
+o[p] = blk.slice(i+1).split(";").map(function(s){
+const a = s.split(",");
+return {name:a[0], lat:+a[1], lon:+a[2], alt:+a[3], area:p};
+}).filter(function(s){ return s.name && !isNaN(s.lat) && !isNaN(s.lon); });
+});
+STN = o;
+STN_ALL = Object.keys(o).reduce(function(acc,k){ return acc.concat(o[k]); }, []);
+return STN_ALL.length;
+}
+async function loadStations(){
+try{
+const res = await fetch(STN_URL, {credentials:"same-origin"});
+if(!res.ok) throw new Error("HTTP "+res.status);
+const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+const el = doc.getElementById("amd-data");
+if(!el) throw new Error("データが見つかりません");
+if(parseStn(el.textContent.trim()) < 100) throw new Error("データが不完全です");
+stnReady = true;
+}catch(e){ stnReady = false; }
+}
+function prefOfStn(s){ return HOKKAIDO_BR.has(s.area) ? "北海道" : s.area; }
+function areaLabel(p){ return HOKKAIDO_BR.has(p) ? ("北海道("+p+")") : p; }
+function terrainOfAlt(a){ return a < 200 ? "flat" : a < 400 ? "chuusankan" : "kourei"; }
+function hav(a1,o1,a2,o2){
+const R=6371, r=Math.PI/180, dA=(a2-a1)*r, dO=(o2-o1)*r;
+const x=Math.sin(dA/2)*Math.sin(dA/2)+Math.cos(a1*r)*Math.cos(a2*r)*Math.sin(dO/2)*Math.sin(dO/2);
+return 2*R*Math.asin(Math.min(1,Math.sqrt(x)));
+}
+function nearestStn(la,lo){
+let best=null, bd=1e9;
+STN_ALL.forEach(function(s){ const d=hav(la,lo,s.lat,s.lon); if(d<bd){bd=d;best=s;} });
+return {stn:best, dist:bd};
+}
+function nearestList(la,lo,n){
+return STN_ALL.map(function(s){ return {s:s, d:hav(la,lo,s.lat,s.lon)}; })
+.sort(function(a,b){ return a.d-b.d; }).slice(0, n||6);
+}
+/* ひらがな→カタカナ、市区町村・都道府県の接尾辞を落として緩く照合する */
+function normQ(s){
+return String(s||"").replace(/[都道府県市区町村郡]/g,"")
+.replace(/[ぁ-ゖ]/g, function(c){ return String.fromCharCode(c.charCodeAt(0)+0x60); })
+.replace(/[\s　]/g,"").trim();
+}
+function searchStations(q){
+const n = normQ(q); if(!n) return [];
+const exact=[], part=[];
+STN_ALL.forEach(function(s){
+const nm = normQ(s.name);
+if(nm===n) exact.push(s);
+else if(nm.indexOf(n)>=0 || (n.length>=2 && n.indexOf(nm)>=0) || normQ(s.area).indexOf(n)>=0) part.push(s);
+});
+return exact.concat(part).slice(0,12).map(function(s){ return {s:s, d:null}; });
+}
+/* 国土地理院の地名検索API(住所・地名 → 緯度経度)。失敗しても地点名検索で動く */
+async function geocode(q){
+try{
+const res = await fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q="+encodeURIComponent(q));
+if(!res.ok) return null;
+const j = await res.json();
+if(!j || !j.length || !j[0].geometry) return null;
+const c = j[0].geometry.coordinates;
+if(!c || c.length<2) return null;
+return {lat:+c[1], lon:+c[0], title:(j[0].properties && j[0].properties.title) || q};
+}catch(e){ return null; }
+}
+function renderList(items, note){
+const el = $("wxList");
+if(!items || !items.length){
+el.innerHTML = '<div class="wxnone">その名前では見つかりませんでした。市町村名(例:京田辺、宇陀)を試すか、「いまいる場所から探す」または下の一覧からお選びください。</div>';
+return;
+}
+el.innerHTML = (note ? '<div class="wxnote">'+note+'</div>' : '') + items.map(function(it){
+const s = it.s, d = it.d;
+const dist = (d==null) ? "" : " ・ 約"+(d<10 ? d.toFixed(1) : String(Math.round(d)))+"km";
+const on = (WX.stn && WX.stn.name===s.name && WX.stn.area===s.area) ? " on" : "";
+return '<button type="button" class="wxrow'+on+'" data-a="'+s.area+'" data-n="'+s.name+'"'+(d==null?'':' data-d="'+d.toFixed(1)+'"')+'>'
++'<b>'+s.name+'</b><span>'+areaLabel(s.area)+' ・ 標高'+s.alt+'m'+dist+'</span></button>';
+}).join("");
+el.querySelectorAll(".wxrow").forEach(function(b){
+b.addEventListener("click", function(){
+const s = (STN[b.dataset.a]||[]).find(function(x){ return x.name===b.dataset.n; });
+if(s) wxPick(s, b.dataset.d ? +b.dataset.d : null);
+});
+});
+}
+async function doSearch(){
+if(!stnReady) return;
+const q = $("wxQ").value.trim();
+if(!q){ $("wxList").innerHTML=""; return; }
+$("wxList").innerHTML = '<div class="wxnote">探しています…</div>';
+const named = searchStations(q);
+const g = await geocode(q);
+if(g){
+const near = nearestList(g.lat, g.lon, 6);
+renderList(near, g.title+" の最寄り(近い順・タップで選択)");
+} else {
+renderList(named, named.length ? "地点名で一致(タップで選択)" : "");
+}
+}
+/* 出穂後の登熟積算気温(日平均気温の単純積算)の目安値
+   早生950〜1000 / 中生1000〜1050 / 晩生1050〜1100℃(籾黄化率85〜90%) を中央値で採用 */
+const WX = {stn:null, dist:null, status:"idle", clim:null, years:null, msg:"", nYears:0};
+function wxSpan(){ const e = now.getFullYear()-1; return [e-4, e]; }
+function mdOf(d){ const p=function(n){return String(n).padStart(2,"0");}; return p(d.getMonth()+1)+"-"+p(d.getDate()); }
+function tAt(d, map){
+const m = map || WX.clim; if(!m) return null;
+let v = m[mdOf(d)];
+if(v==null && d.getMonth()===1 && d.getDate()===29) v = m["02-28"];
+return (v==null) ? null : v;
+}
+function wxHeadDays(plant, target, map){
+let s=0; const d=new Date(plant);
+for(let i=1;i<=200;i++){ d.setDate(d.getDate()+1); const t=tAt(d,map); if(t==null) return null; s+=Math.max(0,t-10); if(s>=target) return i; }
+return null;
+}
+function wxRipenDays(head, target, map){
+let s=0; const d=new Date(head);
+for(let i=1;i<=110;i++){ d.setDate(d.getDate()+1); const t=tAt(d,map); if(t==null) return null; s+=t; if(s>=target) return i; }
+return null;
+}
+function wxMean(head,a,b,map){
+let s=0,n=0;
+for(let i=a;i<=b;i++){ const d=new Date(head); d.setDate(d.getDate()+i); const t=tAt(d,map); if(t==null) return null; s+=t; n++; }
+return n ? s/n : null;
+}
+/* 田植え適期: 7日移動平均の日平均気温がしきい値に達する最初の日(3/1以降) */
+function wxPlantStart(th){
+if(!WX.clim) return null;
+const d = new Date(state.year,2,1);
+for(let i=0;i<160;i++){
+let s=0, ok=true;
+for(let k=0;k<7;k++){ const dd=new Date(d); dd.setDate(dd.getDate()+k); const t=tAt(dd); if(t==null){ok=false;break;} s+=t; }
+if(ok && s/7>=th) return new Date(d);
+d.setDate(d.getDate()+1);
+}
+return null;
+}
+function rainSum(a,b){
+if(!WX.rain) return null;
+let s=0; const d=new Date(a); const n=Math.round((b-a)/86400000);
+for(let i=0;i<=n;i++){ const v=WX.rain[mdOf(d)]; if(v!=null) s+=v; d.setDate(d.getDate()+1); }
+return s;
+}
+/* 出穂日 h の登熟環境。出穂後20日平均(高温側の指標)と出穂後40日平均(登熟が足りるかの指標) */
+function ripenEnv(h, map){
+const a=wxMean(h,1,20,map), b=wxMean(h,1,40,map);
+return (a==null||b==null) ? null : {m20:a, m40:b};
+}
+/* この地点の出穂適期。
+   高温側: 出穂後20日間の平均が26〜27℃を超えると白未熟粒が増える(農研機構・農水省)
+   低温側: 出穂後40日間の平均が21〜22℃を下回ると登熟が足りない(群馬県・青森県) */
+function headWindow(){
+if(!WX.clim) return null;
+if(WX.hw && WX.hwYear===state.year) return WX.hw;
+const first=new Date(state.year,6,1), all=[];
+for(let i=0;i<92;i++){
+const h=new Date(first); h.setDate(h.getDate()+i);
+const e=ripenEnv(h); if(!e) continue;
+let s=-Math.abs(e.m20-24.5)*1.5;
+if(e.m20>27) s-=(e.m20-27)*14; else if(e.m20>26) s-=(e.m20-26)*5;
+if(e.m40<22) s-=(22-e.m40)*10;
+if(e.m40<21) s-=(21-e.m40)*22;
+all.push({h:new Date(h), s:s, m20:e.m20, m40:e.m40});
+}
+if(!all.length) return null;
+let best=all[0]; all.forEach(function(o){ if(o.s>best.s) best=o; });
+const ok=all.filter(function(o){ return o.m20<=26.5 && o.m40>=22 && o.m40<=26.5; });
+const last=all.filter(function(o){ return o.m40>=21; });
+WX.hw={best:best, from:ok.length?ok[0].h:null, to:ok.length?ok[ok.length-1].h:null,
+       safeLast:last.length?last[last.length-1].h:null};
+WX.hwYear=state.year;
+return WX.hw;
+}
+/* 目標の出穂日にいちばん近づく田植え日を、有効積算温度から逆算する */
+/* 現実的に田植えできる期間。活着下限(日平均13℃)から約2か月を上限とする */
+function plantWindow(){
+const a=wxPlantStart(13); if(!a) return null;
+const b=new Date(a); b.setDate(b.getDate()+60);
+return {from:a, to:b};
+}
+function recPlantFor(eatT, hTarget){
+const w=plantWindow(); if(!w) return null;
+let best=null, bd=Infinity;
+const n=Math.round((w.to-w.from)/86400000);
+for(let i=0;i<=n;i++){
+const p=new Date(w.from); p.setDate(p.getDate()+i);
+const dd=wxHeadDays(p, eatT); if(dd==null) continue;
+const h=new Date(p); h.setDate(h.getDate()+dd);
+const gap=Math.abs(h-hTarget);
+if(gap<bd){ bd=gap; best=p; }
+}
+return best;
+}
+/* この地点でその品種が成立するかを、気温だけで判定する */
+function varietyFit(v){
+const hw=headWindow(); if(!hw) return null;
+const M=MATURITY[v.type], eatT=vEat(v,M), accT=vAcc(v,M);
+const p=baseDate();
+const dd=wxHeadDays(p, eatT); if(dd==null) return null;
+const h=new Date(p); h.setDate(h.getDate()+dd);
+const e=ripenEnv(h); if(!e) return null;
+const rp=wxRipenDays(h, accT);
+const good=[], bad=[];
+let score=100;
+if(e.m20>=27){
+score-=35; bad.push("出穂後20日の平均が"+e.m20.toFixed(1)+"℃と高く、白未熟粒が出やすい");
+if(vd(v,3)>=4){ score+=18; good.push("高温登熟性が強い"); }
+else if(vd(v,3)===1){ score-=12; bad.push("高温登熟性が弱い"); }
+} else if(e.m20>=26){
+score-=10; bad.push("出穂後20日の平均が"+e.m20.toFixed(1)+"℃でやや高い");
+if(vd(v,3)>=4){ score+=8; good.push("高温登熟性が強い"); }
+} else if(e.m20>=22){ good.push("登熟期の気温が"+e.m20.toFixed(1)+"℃で適温域"); }
+if(e.m40<21){ score-=45; bad.push("出穂後40日の平均が"+e.m40.toFixed(1)+"℃で、登熟が間に合いにくい"); }
+else if(e.m40<22){ score-=12; bad.push("出穂後40日の平均が"+e.m40.toFixed(1)+"℃でやや冷涼"); }
+if(rp==null){ score-=60; bad.push("収穫に必要な積算気温に届かない"); }
+const cold=wxMean(h,-14,-7);
+if(cold!=null && cold<20){
+score-=22; bad.push("減数分裂期(出穂の1〜2週前)の平均が"+cold.toFixed(1)+"℃で、不稔のおそれ");
+if(vd(v,2)>=4){ score+=14; good.push("耐冷性が強い"); }
+else if(vd(v,2)===1){ score-=10; bad.push("耐冷性が弱い"); }
+}
+const hv=(rp!=null)?(function(){ const x=new Date(h); x.setDate(x.getDate()+rp); return x; })():null;
+if(hv){
+const r=rainSum(new Date(hv.getTime()-10*86400000), hv);
+if(r!=null && r>=110 && vd(v,5)>0 && vd(v,5)<=2){ score-=10; bad.push("収穫前10日の平年降水量が"+Math.round(r)+"mmと多く、穂発芽しやすい品種"); }
+}
+/* 自然栽培は無農薬・無肥料のため、倒伏といもち病への強さが実際の成否を大きく左右する */
+const tou=vd(v,6), imo=vd(v,4);
+if(tou>=5){ score+=7; good.push("倒伏に強い"); }
+else if(tou===4){ score+=3; good.push("倒伏にやや強い"); }
+else if(tou===2){ score-=4; bad.push("倒伏にやや弱い"); }
+else if(tou===1){ score-=8; bad.push("倒伏に弱い(無肥料では倒れにくくなるが、長稈品種は注意)"); }
+if(imo>=5){ score+=7; good.push("いもち病に強い"); }
+else if(imo===4){ score+=3; good.push("いもち病にやや強い"); }
+else if(imo===2){ score-=4; bad.push("いもち病にやや弱い"); }
+else if(imo===1){ score-=8; bad.push("いもち病に弱い(無農薬では効いてくる)"); }
+if(vd(v,0)===0 && vd(v,1)===0) bad.push("公的な生育データが乏しく、熟期の代表値で計算しています");
+return {v:v, score:score, plant:p, head:h, harvest:hv, rp:rp, m20:e.m20, m40:e.m40, good:good, bad:bad};
+}
+function wxRender(){
+const info=$("wxInfo"), badge=$("wxBadge");
+if(!info) return;
+if(WX.status==="idle"){ badge.textContent="未設定"; info.innerHTML = WX.msg ? '<span class="wxerr">'+WX.msg+'</span>' : ""; return; }
+const s=WX.stn, head='<b class="wt">📡 '+s.name+'(' + areaLabel(s.area) + ') 標高'+s.alt+'m</b>'+(WX.dist!=null?' <span class="wxyr">現在地から約'+Math.round(WX.dist)+'km</span>':'')+'<br>';
+if(WX.status==="loading"){ badge.textContent="取得中…"; info.innerHTML = head+'<span class="wxyr">過去5年の気象データを取得しています…</span>'; return; }
+if(WX.status==="error"){ badge.textContent="取得できず"; info.innerHTML = head+'<span class="wxerr">'+WX.msg+'</span><br><span class="wxyr">気象データなしの標準カレンダー(都道府県別の目安)で計算します。</span>'; return; }
+badge.textContent="連動中";
+const sp=wxSpan();
+const p13=wxPlantStart(13), p15=wxPlantStart(15);
+let h='';
+h += head;
+h += '<span class="wxok">✓ '+sp[0]+'〜'+sp[1]+'年('+WX.nYears+'年分)の日平均気温を反映しています</span><br>';
+if(p13) h += '苗が活着できる気温になる時期:日平均13℃以上=<b>'+(p13.getMonth()+1)+'/'+p13.getDate()+'</b>ごろ'+(p15?'／安全側の15℃以上=<b>'+(p15.getMonth()+1)+'/'+p15.getDate()+'</b>ごろ':'')+'<br><span class="wxyr">※これは「これより前に植えると活着しにくい」という下限の目安です。実際の田植え日は、出穂期から逆算した推奨日(下の品種欄)を優先してください。</span><br>';
+info.innerHTML = h;
+}
+async function wxLoad(stn, dist){
+WX.stn=stn; WX.dist=(dist==null?null:dist); WX.status="loading"; WX.clim=null; WX.years=null; WX.msg="";
+wxRender();
+const sp=wxSpan();
+const url = "https://archive-api.open-meteo.com/v1/archive?latitude="+stn.lat+"&longitude="+stn.lon+"&elevation="+stn.alt
++ "&start_date="+sp[0]+"-01-01&end_date="+sp[1]+"-12-31&daily=temperature_2m_mean,precipitation_sum&timezone=Asia%2FTokyo";
+try{
+const ctl = (typeof AbortController!=="undefined") ? new AbortController() : null;
+const to = ctl ? setTimeout(function(){ctl.abort();}, 20000) : null;
+const res = await fetch(url, ctl?{signal:ctl.signal}:{});
+if(to) clearTimeout(to);
+if(!res.ok) throw new Error("HTTP "+res.status);
+const j = await res.json();
+if(!j.daily || !j.daily.time) throw new Error("形式エラー");
+const T=j.daily.time, V=j.daily.temperature_2m_mean, P=j.daily.precipitation_sum||[];
+const byYear={}, sum={}, cnt={}, ys={}, rsum={}, rcnt={};
+for(let i=0;i<T.length;i++){
+const v=V[i], md=T[i].slice(5), y=T[i].slice(0,4);
+if(P[i]!=null){ rsum[md]=(rsum[md]||0)+P[i]; rcnt[md]=(rcnt[md]||0)+1; }
+if(v==null) continue;
+if(!byYear[y]) byYear[y]={};
+byYear[y][md]=v; ys[y]=1;
+sum[md]=(sum[md]||0)+v; cnt[md]=(cnt[md]||0)+1;
+}
+const clim={}; let n=0;
+for(const md in sum){ clim[md]=sum[md]/cnt[md]; n++; }
+if(n<330) throw new Error("取得できた日数が足りません");
+const rain={}; for(const md in rsum) rain[md]=rsum[md]/rcnt[md];
+WX.clim=clim; WX.rain=rain; WX.years=byYear; WX.nYears=Object.keys(ys).length; WX.status="ready";
+WX.hw = null;
+}catch(e){
+WX.status="error";
+WX.msg = (e && e.name==="AbortError") ? "気象データの取得がタイムアウトしました。" : "気象データを取得できませんでした(オフラインまたは提供元の一時的な障害)。";
+}
+wxRender();
+drawForm();
+if(currentTasks.length) makePlan(false);
+}
+function wxPick(stn, dist){
+WX.hw=null; WX.hwYear=null;
+const el=$("wxList");
+if(el) el.querySelectorAll(".wxrow").forEach(function(b){
+b.classList.toggle("on", b.dataset.a===stn.area && b.dataset.n===stn.name);
+});
+state.pref = prefOfStn(stn);
+state.terrain = terrainOfAlt(stn.alt);
+wxLoad(stn, dist);
+}
+function wxFillStn(area, sel){
+const el=$("wxStn");
+el.innerHTML = '<option value="">地点を選ぶ</option>' + (area?STN[area]:[]).map(function(s,i){
+return '<option value="'+i+'"'+(sel===i?' selected':'')+'>'+s.name+'(標高'+s.alt+'m)</option>';
+}).join("");
+}
+async function initWx(){
+const ps=$("wxPref");
+$("wxInfo").innerHTML = '<span class="wxyr">アメダス地点データを読み込んでいます…</span>';
+$("geoBtn").disabled = true;
+await loadStations();
+$("geoBtn").disabled = false;
+if(!stnReady){
+$("wxBadge").textContent = "利用できません";
+$("geoBtn").disabled = true;
+ps.disabled = true; $("wxStn").disabled = true;
+$("wxInfo").innerHTML = '<span class="wxerr">アメダス地点データを読み込めませんでした。都道府県別の標準カレンダーで工程表を作成できます。</span>';
+return;
+}
+$("wxInfo").innerHTML = "";
+ps.innerHTML = '<option value="">都道府県から探す</option>' + Object.keys(STN).map(function(p){
+return '<option value="'+p+'">'+areaLabel(p)+'</option>';
+}).join("");
+ps.addEventListener("change", function(){ wxFillStn(ps.value); });
+$("wxStn").addEventListener("change", function(){
+const a=ps.value, i=$("wxStn").value;
+if(a===""||i==="") return;
+wxPick(STN[a][+i], null);
+});
+$("wxGoBtn").addEventListener("click", doSearch);
+$("wxQ").addEventListener("keydown", function(e){ if(e.key==="Enter"){ e.preventDefault(); doSearch(); } });
+$("geoBtn").addEventListener("click", function(){
+const btn=$("geoBtn");
+if(!navigator.geolocation){ $("wxList").innerHTML='<div class="wxnone">この端末では現在地を取得できません。地名で検索するか、下の一覧からお選びください。</div>'; return; }
+btn.textContent="📍 現在地を取得中…"; btn.disabled=true;
+navigator.geolocation.getCurrentPosition(function(pos){
+btn.textContent="📍 いまいる場所から探す"; btn.disabled=false;
+renderList(nearestList(pos.coords.latitude, pos.coords.longitude, 6), "いまいる場所の最寄り(近い順・タップで選択)");
+}, function(){
+btn.textContent="📍 いまいる場所から探す"; btn.disabled=false;
+$("wxList").innerHTML='<div class="wxnone">現在地を取得できませんでした。位置情報の許可をご確認いただくか、地名で検索してください。</div>';
+}, {timeout:12000, maximumAge:600000});
+});
+wxRender();
+}
+function wxVarBlock(g){
+if(!g.wx){
+if(WX.status!=="ready") return '';
+if(g.wxFail==="ripen") return '<div class="wxwarn"><b>⚠ この組み合わせでは登熟しきらない可能性があります</b><br>'+WX.stn.name+'の実測気温では、この田植え日だと出穂が遅く、収穫までに必要な積算気温に届きませんでした。<b>もっと熟期の早い品種(早生)を選ぶ</b>か、<b>田植えを早める</b>ことをご検討ください。日付は標準カレンダーで表示しています。</div>';
+if(g.wxFail==="heading") return '<div class="wxwarn"><b>⚠ この田植え日では出穂まで到達しません</b><br>'+WX.stn.name+'の実測気温では、この田植え日から出穂に必要な積算温度に達しませんでした。田植えを早めるか、熟期の早い品種をご検討ください。日付は標準カレンダーで表示しています。</div>';
+return '';
+}
+const w=g.wx, sp=wxSpan();
+const hd=addDays(g.hDays), hv=addDays(g.hvDays);
+let s = '<br><span class="wxok">📡 '+WX.stn.name+'の実測気温(' + sp[0] + '〜' + sp[1] + '年)で補正済み</span><br>';
+s += '出穂予定 <b>'+(hd.getMonth()+1)+'/'+hd.getDate()+'</b> → 収穫予定 <b>'+(hv.getMonth()+1)+'/'+hv.getDate()+'</b>(出穂後'+g.ripen+'日・積算気温'+w.target+'℃到達)<br>';
+if(w.yrs && w.yrs.length>1){
+const hvs=w.yrs.map(function(x){return x.hv;});
+const mn=Math.min.apply(null,hvs), mx=Math.max.apply(null,hvs);
+const d1=addDays(mn), d2=addDays(mx);
+s += '<span class="wxyr">年ごとのばらつき: 収穫 '+(d1.getMonth()+1)+'/'+d1.getDate()+' 〜 '+(d2.getMonth()+1)+'/'+d2.getDate()+'('+w.yrs.length+'年の実績気温で再計算)</span><br>';
+}
+if(w.hot){
+s += '<div class="wxwarn"><b>⚠ 高温登熟のおそれ</b><br>出穂後5〜24日の平均気温が'+w.meanRipen.toFixed(1)+'℃と高いため、登熟が早まります。刈取り目標を'+w.target+'℃に下げて計算しました。籾の黄化を早めから確認してください。</div>';
+} else if(w.m20!=null && w.m20>=27){
+s += '<div class="wxwarn"><b>⚠ 白未熟粒のリスク</b><br>出穂後20日間の平均気温が'+w.m20.toFixed(1)+'℃です。27℃を超えると白未熟粒が出やすくなります。田植えを数日遅らせて出穂期をずらすのも一策です。</div>';
+}
+return s;
+}
+let fitOpen = false;
+function drawFit(){
+const box=$("fitBox"); if(!box) return;
+if(WX.status!=="ready"){ box.innerHTML=""; return; }
+const hw=headWindow();
+const list=VARIETIES.filter(v=>v.id!=="custom").map(varietyFit).filter(Boolean);
+if(!list.length || !hw){ box.innerHTML=""; return; }
+list.sort((a,b)=> (b.score-a.score) || ((b.v.nat?1:0)-(a.v.nat?1:0)));
+const mark=s=> s>=90 ? ['◎','ok'] : s>=70 ? ['○','ok'] : s>=45 ? ['△','mid'] : ['×','ng'];
+const row=(f,i)=>{
+const [ch,cls]=mark(f.score);
+const why=(f.bad.concat(f.good)).slice(0,2).join(" / ") || "気温面での大きな問題は見当たりません";
+const sel=(f.v.id===state.variety)?" sel":"";
+const best=(i===0 && f.score>=70)?'<span class="fitbest">おすすめ</span>':"";
+return `<button type="button" class="fitrow${sel}" data-v="${f.v.id}"><span class="fitmark ${cls}">${ch}</span><span class="fitname">${f.v.nat?"★":""}${f.v.name}${best}</span><span class="fitwhy">出穂 ${f.head.getMonth()+1}/${f.head.getDate()}${f.harvest?` → 収穫 ${f.harvest.getMonth()+1}/${f.harvest.getDate()}`:""}<br>${why}</span></button>`;
+};
+const natList = list.filter(f=>f.v.nat);
+const shown = fitOpen ? list : (natList.length ? natList : list.slice(0,8));
+const rain6 = rainSum(new Date(state.year,5,1), new Date(state.year,6,15));
+box.innerHTML = `<div class="fitwrap">
+<div class="fithead">📊 ${WX.stn.name}で ${state.month}/${state.day} に田植えするなら</div>
+<div class="fitsub">${fitOpen?"全品種":"自然栽培に向く品種(★)"}を、この地点の過去${WX.nYears}年の気温から出穂日を計算して並べています。<b>タップするとその品種で工程表をつくります。</b>この地点で登熟がいちばん良くなる出穂期は<b>${hw.from?`${hw.from.getMonth()+1}/${hw.from.getDate()}〜${hw.to.getMonth()+1}/${hw.to.getDate()}`:"—"}</b>${hw.safeLast?`、<b>${hw.safeLast.getMonth()+1}/${hw.safeLast.getDate()}</b>より遅い出穂は登熟が間に合わなくなる目安`:""}です。田植え日を変えると判定も変わります。${rain6!=null?`<br>梅雨どき(6/1〜7/15)の平年降水量は約${Math.round(rain6)}mm。`:""}</div>
+${shown.map(row).join("")}
+<span class="fitmore" id="fitMore">${fitOpen?`★自然栽培向きだけ表示する(${natList.length}品種)`:`すべての品種を見る(${list.length}品種)`}</span>
+<div class="fitnote">判定は<b>気温</b>が基準です。出穂後20日の平均が27℃を超えると白未熟粒が増え(農研機構・農水省)、出穂後40日の平均が21〜22℃を下回ると登熟が足りません(群馬県・青森県)。降水量は品種の適否を決める公的な基準が見当たらないため判定には使わず、穂発芽しやすい品種で収穫前の降雨が多いときだけ注意を出しています。公的な生育データのない在来種は熟期の代表値で計算しているので、目安としてご覧ください。</div>
+</div>`;
+const mb=$("fitMore"); if(mb) mb.addEventListener("click", ()=>{ fitOpen=!fitOpen; drawFit(); });
+box.querySelectorAll(".fitrow").forEach(function(b){
+b.addEventListener("click", function(){
+state.variety=b.dataset.v;
+drawForm();
+if(currentTasks.length) makePlan(false);
+});
+});
+}
+/* ====== フォーム描画 ====== */
+function drawForm(){
+makeChips("varietyChips",
+VARIETIES.map(v=>({id:v.id, label: v.id==="custom" ? v.name : `${v.nat?"★":""}${v.name}(${MATURITY[v.type].label})`})),
+state.variety, id=>{ state.variety=id; drawForm(); });
+$("maturityBox").classList.toggle("hidden", state.variety!=="custom");
+makeChips("maturityChips",
+Object.entries(MATURITY).map(([id,m])=>({id, label:`${m.label}(収穫 田植え+${m.harvest}日)`})),
+state.maturity, id=>{ state.maturity=id; drawForm(); });
+// 日付
+{
+const p=n=>String(n).padStart(2,"0");
+const di=$("dateInput");
+di.value = `${state.year}-${p(state.month)}-${p(state.day)}`;
+di.min = `${now.getFullYear()}-01-01`;
+di.max = `${now.getFullYear()+2}-12-31`;
+}
+$("dateDisplay").textContent = "🌱 " + fmt(baseDate());
+drawFit();
+// 品種メモ: 出穂の性質・出穂までの期間・出穂予定日・推奨田植え日
+{
+const g = growthDates();
+const v = VARIETIES.find(x=>x.id===state.variety);
+const vName = state.variety==="custom" ? "その他の品種" : v.name;
+const headingDate = addDays(g.hDays);
+const rec = g.recPlant || g.refPlant;
+const senseNote = g.M.sense >= 0.6
+? "感光性が強い品種のため、出穂日は日の長さでほぼ決まります。田植えが多少前後しても出穂の暦日は大きく動きません(遅く植えるほど出穂までの日数は短くなります)。"
+: g.M.sense <= 0.2
+? "感温性が強い品種のため、田植えが遅れるとその分だけ出穂もほぼ同じ日数遅れます。"
+: "温度と日長の両方の影響を受ける中間型で、田植えの遅れの一部が出穂の遅れに現れます。";
+$("varInfo").innerHTML =
+(WX.stn ? "" : `<div class="wxwarn">まだ観測地点が選ばれていません。上の欄で最寄りのアメダス地点を選ぶと、その地点の実測気温で日付を計算し直します。いまは標準的な日数で表示しています。</div>`) +
+`<b class="vt">🌾 ${vName}(${g.M.label})${WX.stn?` × ${WX.stn.name}(標高${WX.stn.alt}m)`:""}</b><br>` +
+`出穂の性質:<b>${g.M.senseLabel}</b><br>` +
+`いまの田植え日(${state.month}/${state.day})なら 出穂まで約 <b>${g.hDays}日</b> → 出穂予定:<b>${fmt(headingDate)}</b>ごろ<br>` +
+`収穫は出穂から約${g.ripen}日後${g.wx?`(観測地点の実測気温を積算して算出)`:`(積算温度による地域補正込み)`}<br>` +
+(g.wx && g.wx.hw
+? `この地点で登熟がいちばん良くなる出穂期は <b>${g.wx.hw.from?`${g.wx.hw.from.getMonth()+1}/${g.wx.hw.from.getDate()}〜${g.wx.hw.to.getMonth()+1}/${g.wx.hw.to.getDate()}`:"—"}</b> → この品種の推奨田植え日:<b>${fmt(rec)}</b>ごろ(前後5日)<br>`
+: `この場所でのこの品種の出穂の目安は ${g.ideal.getMonth()+1}月${g.ideal.getDate()}日ごろ → 推奨田植え日:<b>${fmt(rec)}</b>ごろ(前後5日)<br>`) +
+`<span style="font-size:.78rem">${senseNote}</span>` +
+wxVarBlock(g) +
+`<br><span class="setbtn" id="setRecBtn">推奨日を田植え日にセット</span>`;
+const applyRec = ()=>{
+state.year = rec.getFullYear(); state.month = rec.getMonth()+1; state.day = rec.getDate();
+drawForm();
+if(currentTasks.length) makePlan(false);
+};
+$("setRecBtn").addEventListener("click", applyRec);
+$("setRecBtn2").onclick = applyRec;
+$("setRecBtn2").textContent = `おすすめの田植え日(${rec.getMonth()+1}/${rec.getDate()})にする`;
+}
+// 面積
+$("areaVal").textContent = `${round1(state.area)} ${state.unit==="tan"?"反":state.unit}`;
+const a = areaInA();
+$("areaNote").textContent = `= ${round1(a)}a(約${round1(a/10)}反)`;
+makeChips("unitChips",
+[{id:"a",label:"a(アール)"},{id:"tan",label:"反(=10a)"},{id:"ha",label:"ha"}],
+state.unit, id=>{ state.unit=id; drawForm(); });
+}
+function clampDay(){
+const dim = daysInMonth(state.year, state.month);
+if(state.day>dim) state.day = dim;
+}
+$("dateInput").addEventListener("change", function(){
+const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(this.value);
+if(!m) return;
+state.year=+m[1]; state.month=+m[2]; state.day=+m[3];
+drawForm();
+if(currentTasks.length) makePlan(false);
+});
+document.querySelectorAll("#inasaku-kyokasho .dnudge").forEach(b=>{
+b.addEventListener("click", ()=>{
+const d=baseDate(); d.setDate(d.getDate()+Number(b.dataset.dd));
+state.year=d.getFullYear(); state.month=d.getMonth()+1; state.day=d.getDate();
+drawForm();
+if(currentTasks.length) makePlan(false);
+});
+});
+document.querySelectorAll("#inasaku-kyokasho .stepper .stepbtn").forEach(b=>{
+b.addEventListener("click", ()=>{
+state.area = Math.max(0.5, round1(state.area + Number(b.dataset.d)));
+drawForm();
+if(currentTasks.length) makePlan(false);
+});
+});
+/* ====== 工程表 ====== */
+let currentTasks = [];
+/* 出穂日の算出モデル:
+感温性(早生ほど強い)…出穂は「田植え+日数」で動く
+感光性(晩生ほど強い)…出穂は日長で決まり、田植えがずれても暦日はあまり動かない
+heading = 基準日数 − 感光係数 × (田植え日 − 基準田植え日)
+収穫 = 出穂 + 登熟日数(熟期タイプ+地域の気温で補正) */
+function growthDates(){
+const v = VARIETIES.find(x=>x.id===state.variety);
+const mat = state.variety==="custom" ? state.maturity : v.type;
+const M = MATURITY[mat];
+const vAdj = (state.variety !== "custom" && v.headingAdj) ? v.headingAdj : 0;
+const base = M.heading + vAdj;
+const ideal = new Date(state.year, 7, 15 + vAdj + (M.idealShift||0));
+const refPlant = new Date(ideal); refPlant.setDate(refPlant.getDate() - base);
+const delta = Math.round((baseDate() - refPlant) / 86400000);
+let hDays = Math.round(base - M.sense * delta);
+hDays = Math.max(55, Math.min(115, hDays));
+let ripen = (M.harvest - M.heading);
+let wx = null, recPlant = refPlant, wxFail = null;
+if(WX.status==="ready"){
+/* 出穂=移植からの有効積算温度(基準10℃)が品種の目標値に達した日、収穫=出穂後の積算気温が目標に達した日 */
+const eatTarget = vEat(v||{}, M);
+const hTemp = wxHeadDays(baseDate(), eatTarget);
+wxFail = hTemp ? "ripen" : "heading";
+const hw = headWindow();
+if(hTemp){
+const hb = Math.max(45, Math.min(140, hTemp));
+const headDate = new Date(baseDate()); headDate.setDate(headDate.getDate()+hb);
+let target = vAcc(v||{}, M), hot = 0;
+const mT = wxMean(headDate,5,24);
+if(mT!=null){ if(mT>=27){ target-=60; hot=2; } else if(mT>=26){ target-=30; hot=1; } }
+let rp = wxRipenDays(headDate, target);
+if(rp!=null) rp = Math.max(32, Math.min(80, rp));
+if(rp){
+hDays = hb; ripen = rp;
+const yrs = [];
+Object.keys(WX.years).forEach(function(y){
+const m = WX.years[y];
+const h2 = wxHeadDays(baseDate(), eatTarget, m); if(!h2) return;
+const hb2 = Math.max(45, Math.min(140, h2));
+const hd2 = new Date(baseDate()); hd2.setDate(hd2.getDate()+hb2);
+const r2 = wxRipenDays(hd2, target, m); if(!r2) return;
+yrs.push({y:y, h:hb2, hv:hb2+Math.max(32,Math.min(80,r2))});
+});
+const env = ripenEnv(headDate);
+const ps13 = wxPlantStart(13);
+const rec2 = hw ? recPlantFor(eatTarget, hw.best.h) : null;
+if(rec2) recPlant = rec2; else if(ps13 && recPlant < ps13) recPlant = ps13;
+wx = {target:target, hot:hot, meanRipen:mT, m20:env?env.m20:null, m40:env?env.m40:null,
+      yrs:yrs, eatTarget:Math.round(eatTarget), plantStart:ps13, hw:hw};
+}
+}
+}
+return {mat, M, base, refPlant, recPlant, delta, hDays, hvDays: hDays + ripen, ripen, ideal, vAdj, wx, wxFail: wx?null:wxFail};
+}
+/* 移植後の積算気温が target に達するまでの日数。気象データがなければ既定値を返す */
+function accDays(target, fallback){
+if(WX.status!=="ready") return fallback;
+let s=0; const d=new Date(baseDate());
+for(let i=1;i<=140;i++){ d.setDate(d.getDate()+1); const t=tAt(d); if(t==null) return fallback; s+=t; if(s>=target) return i; }
+return fallback;
+}
+/* 育苗日数(中苗25〜35日:群馬県・長野県)。移植前1か月の気温が低いほど長くとる */
+function nurseryDays(){
+if(WX.status!=="ready") return 30;
+const a=new Date(baseDate()); a.setDate(a.getDate()-30);
+const m=wxMean(a,1,30);
+if(m==null) return 30;
+return m<13 ? 35 : m<16 ? 33 : m<19 ? 31 : 29;
+}
+function buildDefaultTasks(){
+const g = growthDates();
+const nur = nurseryDays();
+const dChain = accDays(60,  3);
+const dTag   = accDays(400, 17);
+const dChuko = accDays(560, 24);
+const dNaka  = accDays(1000, 45);
+const heading = g.hDays;
+const harvest = g.hvDays;
+return [
+{key:"ensuisen", name:"塩水選・浸種開始", offset:-nur-10, tag:"育苗", cls:"",
+note:"生卵が浮くくらいの塩水(比重1.13)で軽い籾を除き、沈んだ充実籾だけを種にします。その後は冷たい水に7〜10日浸種(水温×日数=積算100℃目安)して芽出しへ。水は毎日入れ替えます。"},
+{key:"sowing",   name:"もみまき(播種)", offset:-nur, tag:"育苗", cls:"",
+note:"種籾は塩水選で充実したものだけを選びます。自然栽培は薄まきにして、太くがっしりした成苗を育てます。"},
+{key:"planting", name:"田植え", offset:0, tag:"基準日", cls:"planting",
+note:"疎植(坪40〜50株・1株2〜3本)が基本。風と光を入れて病害虫に強い株をつくります。植え代かきは浅く丁寧に。"},
+{key:"chain",    name:"チェーン除草(1回目)", offset:dChain, tag:"除草", cls:"",
+note:"雑草がまだ見えない発芽初期(糸状期)に行うのがコツ。ここから除草は7日間隔で続きます。深水管理(5〜7cm)で雑草を抑えます。"},
+{key:"chain2",   name:"チェーン除草(2回目)", offset:dChain+7, tag:"除草", cls:"",
+note:"1回目の7日後。次に発芽してきた芽をもう一度浮かせます。コナギの発芽ピークをここで断つのが勝負どころです。"},
+{key:"taguruma", name:"タグルマ(田車)除草", offset:dTag, tag:"除草", cls:"",
+note:"チェーン除草から続く7日間隔の3回目。条間を押して土を撹拌し、育ち始めた雑草を浮かせます。株間の草は手取りで補います。"},
+{key:"chuko",    name:"中耕除草機での除草", offset:dChuko, tag:"除草", cls:"",
+note:"7日間隔の仕上げの回。機械除草で条間を整え、土に酸素を入れて根張りも促進します。ここで除草の山場は終わり。取り残しは早めの手取りで。"},
+{key:"azekusa0", name:"畔草刈り(1回目・もみまき前)", offset:-nur-5, tag:"畔管理", cls:"",
+note:"もみまきの前に畔と苗代まわりを刈っておきます。冬を越した枯れ草を片づけるとカメムシ類などの越冬場所が減り、育苗の場所も確保できます。春一番の畔の点検を兼ねて。"},
+{key:"kounn", name:"耕運(春の耕起)", offset:-20, tag:"土づくり", cls:"",
+note:"前年のわらや草を混ぜ込みながら、10〜15cmの浅耕で土をほぐします。入水の2週間以上前に済ませ、わらの分解ガスが苗を傷めないようにします。"},
+{key:"azenuri", name:"畦塗り(畔の補修)", offset:-15, tag:"畔管理", cls:"",
+note:"クワや畦塗り機で畔の内側に泥を塗り固め、水漏れを防ぎます。除草の要である深水管理は、漏れない畔があってこそ。モグラ穴もこの時にふさぎます。"},
+{key:"nyusui", name:"入水開始", offset:-12, tag:"水管理", cls:"",
+note:"田に水を入れ始めます。水口・水尻・水路の点検もこの時に。荒代かきに向けてゆっくり湛水していきます。"},
+{key:"arajiro", name:"荒代かき", offset:-10, tag:"代かき", cls:"",
+note:"水を入れて土を大まかにかき混ぜ、田面をならします。ここでわざと雑草の種を発芽させておき、植え代で練り込んで一世代減らすのが除草剤なしの知恵です。"},
+{key:"azekusa1", name:"畔草刈り(2回目・田植え前)", offset:-7, tag:"畔管理", cls:"",
+note:"田植え前に一度畔を刈っておくと、除草期の見通しが良くなります。刈り草は畔に敷いておくと乾燥と崩れの防止に。"},
+{key:"uejiro", name:"植え代かき", offset:-3, tag:"代かき", cls:"",
+note:"荒代で発芽した雑草の芽を練り込み、表面を平らに仕上げます。均平は除草剤の代わり――高低差5cmが草の出方を分けます。浅く、丁寧すぎるほど丁寧に。"},
+{key:"azekusa2", name:"畔草刈り(3回目)", offset:30, tag:"畔管理", cls:"",
+note:"梅雨で草がよく伸びる時期。丸刈りにせず少し高さを残す「高刈り」にすると、カエルやクモなど天敵の住みかが残り害虫が減ります。"},
+{key:"mizokiri", name:"溝切り", offset:dNaka-4, tag:"水管理", cls:"",
+note:"中干しの前に田に排水の溝を切っておくと、水の抜き差しが素早くなり、その後の間断かん水も楽になります。排水口に向けて数条おきに。"},
+{key:"nakaboshi",name:"中干し", offset:dNaka, tag:"水管理", cls:"",
+note:"軽くヒビが入る程度に7〜10日。無効分げつを抑え根を強くします。自然栽培では土を痛めないよう「軽め」が基本。生きもの保護のため実施しない選択もあります。"},
+{key:"azekusa3", name:"畔草刈り(4回目・出穂前最後)", offset:heading-14, tag:"畔管理", cls:"",
+note:"出穂前に済ませる最後の草刈り。出穂直前〜出穂中に刈ると、草にいたカメムシが穂へ移って斑点米の原因になります。この回で刈り終え、出穂中は刈らないこと。"},
+{key:"heading",  name:"出穂(しゅっすい)", offset:heading, tag:"生育の節目", cls:"milestone",
+note:"出穂前後2週間は水を切らさないこと(花水)。除草作業はこの時期までに終えます。"},
+{key:"drain",    name:"落水", offset:harvest-10, tag:"水管理", cls:"",
+note:"収穫の約10日前に落水し、ほ場を乾かしてコンバイン作業に備えます。早すぎる落水は登熟不良のもと。"},
+{key:"azekusa4", name:"畔草刈り(5回目・稲刈り前)", offset:harvest-7, tag:"畔管理", cls:"",
+note:"稲刈り作業の足場づくり。機械を入れる畔際や進入路を中心に刈っておくと、当日の作業がスムーズです。"},
+{key:"harvest",  name:"収穫(稲刈り)", offset:harvest, tag:"収穫", cls:"milestone",
+note: g.wx
+? `${WX.stn.name}の実測気温(過去${WX.nYears}年平均)では、出穂後${g.ripen}日で積算気温${g.wx.target}℃に到達します。籾の8〜9割が黄化した頃が適期。天日干し(はざ掛け)なら食味がさらに向上します。`
+: "出穂後の積算温度 約1,000℃(40〜45日)、籾の8〜9割が黄化した頃が適期。天日干し(はざ掛け)なら食味がさらに向上します。"},
+{key:"kansou", name:"乾燥・籾すり", offset:harvest+3, tag:"収穫", cls:"",
+note:"収穫後は速やかに乾燥へ。水分15%前後が目安で、急激な高温乾燥は食味を落とすのでゆっくりと。籾すり後は低温・低湿で保存します。来年の種籾もここで取り分けておきましょう。"},
+{key:"akiokoshi", name:"秋起こし", offset:harvest+20, tag:"土づくり", cls:"",
+note:"稲刈り後、わらを田に広げて早めに浅く(10cm程度)すき込みます。秋のうちに耕しておくと春までにわらの分解が進み、翌年のガス湧きを防げます。無肥料栽培では、わらと刈り草を土に還すこの作業が翌年の地力の源になります。"},
+];
+}
+function render(){
+const tl = $("timeline");
+tl.innerHTML = "";
+const sorted = [...currentTasks].sort((a,b)=>a.offset-b.offset);
+sorted.forEach(t=>{
+const dt = addDays(t.offset);
+const li = document.createElement("li");
+if(t.cls) li.className = t.cls;
+const rel = t.offset===0 ? "田植え当日" : (t.offset>0 ? `田植え +${t.offset}日` : `田植え −${-t.offset}日`);
+li.innerHTML = `
+<div class="date">${fmt(dt)}<small>${rel}</small></div>
+<div class="name">${t.name}<span class="tag">${t.tag}</span></div>
+<div class="note">${t.note}</div>`;
+if(t.key!=="planting"){
+const adj = document.createElement("div");
+adj.className = "adjust no-print";
+adj.innerHTML = `日数調整:
+<button class="stepbtn" data-a="-1">−1日</button>
+<span class="val">${t.offset>0?"+":""}${t.offset}日</span>
+<button class="stepbtn" data-a="1">＋1日</button>`;
+adj.querySelectorAll("button").forEach(b=>{
+b.addEventListener("click", ()=>{ t.offset += Number(b.dataset.a); render(); });
+});
+li.appendChild(adj);
+}
+tl.appendChild(li);
+});
+}
+function makePlan(scroll=true){
+currentTasks = buildDefaultTasks().map(t=>({...t, defaultOffset:t.offset}));
+const v = VARIETIES.find(x=>x.id===state.variety);
+const mat = state.variety==="custom" ? state.maturity : v.type;
+const vName = state.variety==="custom" ? "その他の品種" : v.name;
+const a = areaInA();
+$("summaryBox").innerHTML =
+`<strong>${WX.stn?`${WX.stn.name}(標高${WX.stn.alt}m)`:"観測地点なし"} / ${vName}(${MATURITY[mat].label})</strong> ・ 田植え日 ${fmt(baseDate())} ・ 面積 ${round1(a)}a(約${round1(a/10)}反)<br>
+<span style="font-size:.8rem">${WX.status==="ready"?`日程は${WX.stn.name}の過去${WX.nYears}年の実測気温から計算しています。`:"観測地点が未選択のため、標準的な日数で表示しています。"}</span>`;
+const per10 = a/10;
+$("workloadBox").innerHTML = `<b>📏 面積からの目安(${round1(a)}a)</b>
+種籾(乾籾):約${round1(per10*3)}〜${round1(per10*4)}kg(薄まき 3〜4kg/10a)/
+苗箱:約${Math.ceil(per10*20)}〜${Math.ceil(per10*25)}箱 ・
+チェーン除草 1回あたり約${round1(per10*0.5)}時間 ・
+タグルマ約${round1(per10*2)}〜${round1(per10*3)}時間 ・
+中耕除草機(歩行型)約${round1(per10*1)}〜${round1(per10*1.5)}時間`;
+$("resultCard").classList.remove("hidden");
+render();
+if(scroll) $("resultCard").scrollIntoView({behavior:"smooth"});
+}
+$("makeBtn").addEventListener("click", ()=>makePlan(true));
+$("resetBtn").addEventListener("click", ()=>{ currentTasks.forEach(t=>t.offset=t.defaultOffset); render(); });
+$("printBtn").addEventListener("click", ()=>{ try{ window.print(); }catch(e){ alert("この画面では印刷を開けません。ファイルをブラウザで開いてから印刷してください。"); } });
+$("icsBtn").addEventListener("click", ()=>{
+if(!currentTasks.length) return;
+const lines = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//inasaku-suggest//JP","CALSCALE:GREGORIAN"];
+currentTasks.forEach(t=>{
+const d = addDays(t.offset), next = addDays(t.offset+1);
+lines.push("BEGIN:VEVENT",
+`UID:${t.key}-${fmtICS(d)}@inasaku-suggest`,
+`DTSTART;VALUE=DATE:${fmtICS(d)}`,
+`DTEND;VALUE=DATE:${fmtICS(next)}`,
+`SUMMARY:【稲作】${t.name}`,
+`DESCRIPTION:${t.note.replace(/,/g,"\\,")}`,
+"END:VEVENT");
+});
+lines.push("END:VCALENDAR");
+try{
+const blob = new Blob([lines.join("\r\n")], {type:"text/calendar"});
+const aEl = document.createElement("a");
+aEl.href = URL.createObjectURL(blob);
+aEl.download = "inasaku-schedule.ics";
+document.body.appendChild(aEl);
+aEl.click();
+aEl.remove();
+setTimeout(()=>URL.revokeObjectURL(aEl.href), 3000);
+}catch(e){
+alert("この画面ではダウンロードを開けません。ファイルをブラウザで開いてからお試しください。");
+}
+});
+initWx();
+drawForm();
+})();
+</script>
+<style>
+#inasaku-kyokasho, #inasaku-kyokasho *{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",Meiryo,sans-serif;}
+#inasaku-kyokasho{--ink:#333326;--sub:#636355;color:#333326;}
+#inasaku-kyokasho .app-head h1{font-size:27px;letter-spacing:.14em;font-weight:600;color:#fff !important;}
+#inasaku-kyokasho .app-head p{color:#fff !important;}
+#inasaku-kyokasho .app-head p{font-size:15px;}
+#inasaku-kyokasho .sitenav a{font-size:14px;}
+@media(min-width:760px){#inasaku-kyokasho .sitenav{justify-content:center;}}
+#inasaku-kyokasho .hero h2, #inasaku-kyokasho .card h2{font-size:22px;text-align:center;border-left:none;padding-left:0;font-weight:600;letter-spacing:.1em;}
+#inasaku-kyokasho .grouphead{font-size:20px;text-align:center;letter-spacing:.1em;}
+#inasaku-kyokasho .grouphead small{font-size:14px;font-weight:400;}
+#inasaku-kyokasho section.step h2{font-size:21px;justify-content:center;text-align:center;font-weight:600;}
+#inasaku-kyokasho .toc h2{font-size:17px;text-align:center;}
+#inasaku-kyokasho .toc a{font-size:15px;}
+#inasaku-kyokasho .toc a .num{font-size:13px;}
+#inasaku-kyokasho .hero p, #inasaku-kyokasho section.step p, #inasaku-kyokasho .prep p, #inasaku-kyokasho .fail p{font-size:16px;line-height:2;}
+#inasaku-kyokasho .prep h3, #inasaku-kyokasho .fail h3, #inasaku-kyokasho section.step h3{font-size:17px;font-weight:600;}
+#inasaku-kyokasho .rule b{font-size:16px;}
+#inasaku-kyokasho .rule span{font-size:14px;}
+#inasaku-kyokasho .toolrow{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .toolrow th{font-size:14px;}
+#inasaku-kyokasho .flabel{font-size:14px;}
+#inasaku-kyokasho .flabel .picked{font-size:13px;}
+#inasaku-kyokasho .chip{font-size:15px;}
+#inasaku-kyokasho .chip.sm{font-size:14px;}
+#inasaku-kyokasho .datebar{font-size:18px;}
+#inasaku-kyokasho .varinfo{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .varinfo b.vt{font-size:16px;}
+#inasaku-kyokasho .varinfo .setbtn{font-size:14px;}
+#inasaku-kyokasho .stepval{font-size:18px;}
+#inasaku-kyokasho .stepbtn{font-size:15px;}
+#inasaku-kyokasho .btn{font-size:16px;}
+#inasaku-kyokasho .btn-main{font-size:17px;}
+#inasaku-kyokasho .btn-sub{font-size:14px;}
+#inasaku-kyokasho .summary{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .summary strong{font-size:16px;}
+#inasaku-kyokasho .workload{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .tl .date{font-size:17px;}
+#inasaku-kyokasho .tl .date small{font-size:12px;}
+#inasaku-kyokasho .tl .name{font-size:16px;}
+#inasaku-kyokasho .tl .name .tag{font-size:11px;}
+#inasaku-kyokasho .tl .note{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .adjust{font-size:13px;}
+#inasaku-kyokasho .adjust .stepbtn{font-size:14px;}
+#inasaku-kyokasho .adjust .val{font-size:15px;}
+#inasaku-kyokasho .footnote{font-size:13px;}
+#inasaku-kyokasho .point, #inasaku-kyokasho .caution{font-size:15px;line-height:1.95;}
+#inasaku-kyokasho .point b, #inasaku-kyokasho .caution b{font-size:13px;}
+#inasaku-kyokasho .season{font-size:12px;}
+#inasaku-kyokasho .stepnum{font-size:16px;}
+#inasaku-kyokasho .failcard b.t, #inasaku-kyokasho .weedcard b.t{font-size:16px;}
+#inasaku-kyokasho .failcard .why, #inasaku-kyokasho .weedcard .feat{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .failcard .fix, #inasaku-kyokasho .weedcard .ctrl{font-size:14px;line-height:1.9;}
+#inasaku-kyokasho .failcard .fix b, #inasaku-kyokasho .weedcard .ctrl b{font-size:13px;}
+#inasaku-kyokasho .wtag{font-size:11px;}
+#inasaku-kyokasho .lead-note{font-size:13px;}
+#inasaku-kyokasho .app-foot{font-size:13px;}
+#inasaku-kyokasho .wxbox{border:1px solid #d9d9cc;border-radius:10px;padding:12px;background:#fbfbf7;margin-bottom:6px;}
+#inasaku-kyokasho .wxgeo{width:100%;margin:0;}
+#inasaku-kyokasho .wxsearch{display:flex;gap:8px;margin-bottom:8px;}
+#inasaku-kyokasho .wxinput{flex:1 1 auto;min-width:0;font-size:16px;padding:10px 12px;border:1px solid #ccccbb;border-radius:8px;background:#fff;color:#333326;font-family:inherit;}
+#inasaku-kyokasho .wxgo{flex:0 0 auto;width:auto;padding:10px 16px;margin:0;}
+#inasaku-kyokasho .wxlist{margin-top:10px;}
+#inasaku-kyokasho .wxlist:empty{display:none;}
+#inasaku-kyokasho .wxnote{font-size:13px;color:#636355;margin-bottom:6px;}
+#inasaku-kyokasho .wxnone{font-size:13px;color:#9a3b23;line-height:1.8;}
+#inasaku-kyokasho .wxrow{display:block;width:100%;text-align:left;border:1px solid #d9d9cc;background:#fff;border-radius:9px;padding:10px 12px;margin-bottom:6px;cursor:pointer;font-family:inherit;color:#333326;line-height:1.6;}
+#inasaku-kyokasho .wxrow:active{background:#f0f0e6;}
+#inasaku-kyokasho .wxrow.on{border-color:#2e5d3e;background:#e7f2e9;}
+#inasaku-kyokasho .wxrow b{font-size:16px;font-weight:600;}
+#inasaku-kyokasho .wxrow span{display:block;font-size:13px;color:#636355;}
+#inasaku-kyokasho .wxfall{margin-top:10px;}
+#inasaku-kyokasho .wxfall summary{font-size:13px;color:#2f6b3a;cursor:pointer;}
+#inasaku-kyokasho .wxfall .wxsels{margin-top:8px;}
+#inasaku-kyokasho .dateline{display:flex;gap:8px;align-items:stretch;margin-bottom:8px;}
+#inasaku-kyokasho .dateinput{flex:1 1 auto;min-width:0;font-size:17px;padding:11px 12px;border:1.5px solid #ccccbb;border-radius:9px;background:#fff;color:#333326;font-family:inherit;}
+#inasaku-kyokasho .dnudge{flex:0 0 auto;padding:0 12px;font-size:14px;}
+#inasaku-kyokasho .recbtn{width:100%;margin:8px 0 0;}
+#inasaku-kyokasho .fitbox{margin-top:14px;}
+#inasaku-kyokasho .fitbox:empty{display:none;}
+#inasaku-kyokasho .fitwrap{border:1px solid #d9d9cc;border-radius:10px;padding:12px;background:#fbfbf7;}
+#inasaku-kyokasho .fithead{font-size:15px;font-weight:600;margin-bottom:4px;}
+#inasaku-kyokasho .fitsub{font-size:13px;color:#636355;line-height:1.8;margin-bottom:8px;}
+#inasaku-kyokasho .fitrow{display:flex;width:100%;gap:8px;align-items:flex-start;font-size:14px;line-height:1.75;padding:9px 6px;border:none;border-top:1px dotted #ddddcc;background:none;text-align:left;font-family:inherit;color:#333326;cursor:pointer;border-radius:7px;}
+#inasaku-kyokasho .fitrow:first-of-type{border-top:none;}
+#inasaku-kyokasho .fitrow:active{background:#f0f0e6;}
+#inasaku-kyokasho .fitrow.sel{background:#e7f2e9;}
+#inasaku-kyokasho .fitbest{display:inline-block;margin-left:5px;font-size:11px;font-weight:700;color:#fff;background:#2e5d3e;border-radius:4px;padding:1px 5px;vertical-align:2px;}
+#inasaku-kyokasho .fitmark{flex:0 0 auto;font-weight:700;width:2.4em;}
+#inasaku-kyokasho .fitmark.ok{color:#2f6b3a;}
+#inasaku-kyokasho .fitmark.mid{color:#8a6d1f;}
+#inasaku-kyokasho .fitmark.ng{color:#9a3b23;}
+#inasaku-kyokasho .fitname{flex:0 0 auto;font-weight:600;width:7.5em;}
+#inasaku-kyokasho .fitwhy{flex:1 1 auto;font-size:13px;color:#5c6a60;}
+#inasaku-kyokasho .fitmore{font-size:13px;color:#2f6b3a;cursor:pointer;margin-top:8px;display:inline-block;}
+#inasaku-kyokasho .fitnote{font-size:12px;color:#7a7a6a;line-height:1.75;margin-top:10px;}
+#inasaku-kyokasho .wxsels{display:flex;gap:8px;flex-wrap:wrap;}
+#inasaku-kyokasho .wxsel{flex:1 1 140px;min-width:0;font-size:15px;padding:9px 10px;border:1px solid #ccccbb;border-radius:8px;background:#fff;color:#333326;font-family:inherit;}
+#inasaku-kyokasho .wxinfo{font-size:14px;line-height:1.85;margin-top:10px;}
+#inasaku-kyokasho .wxinfo:empty{display:none;}
+#inasaku-kyokasho .wxinfo b.wt{font-size:15px;}
+#inasaku-kyokasho .wxinfo .wxerr{color:#9a3b23;}
+#inasaku-kyokasho .wxinfo .wxok{color:#2f6b3a;}
+#inasaku-kyokasho .wxyr{font-size:13px;line-height:1.8;color:#636355;}
+#inasaku-kyokasho .wxwarn{margin-top:8px;padding:8px 10px;border-radius:8px;background:#fdf3e7;border:1px solid #e8c9a0;font-size:13px;line-height:1.8;}
+#inasaku-kyokasho .wxsrc{font-size:12px;color:#7a7a6a;margin-top:8px;line-height:1.7;}
+#inasaku-kyokasho{width:100vw;position:relative;left:50%;margin-left:-50vw;}
+#inasaku-kyokasho{text-align:left;}
+#inasaku-kyokasho .app-head{text-align:center;}
+#inasaku-kyokasho .wrap{max-width:800px;}
+</style>
+</div>
