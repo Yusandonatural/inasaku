@@ -1,0 +1,49 @@
+<div id="inasaku-embed">
+<style>
+#inasaku-embed{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",Meiryo,sans-serif;color:#26302a;line-height:1.9;max-width:860px;margin:0 auto;padding:0 12px;}
+#inasaku-embed .lead{font-size:16px;margin:0 0 14px;}
+#inasaku-embed .lead b{color:#2e5d3e;}
+#inasaku-embed ul.pts{margin:0 0 18px;padding-left:1.3em;font-size:15px;}
+#inasaku-embed ul.pts li{margin-bottom:6px;}
+#inasaku-embed .frame-wrap{border:1px solid #dbe5dd;border-radius:14px;overflow:hidden;background:#f7f9f6;}
+#inasaku-embed iframe{width:100%;border:0;display:block;height:1600px;}
+#inasaku-embed .fallback{font-size:13px;color:#5c6a60;margin:10px 0 0;text-align:center;}
+#inasaku-embed .fallback a{color:#2e5d3e;font-weight:600;}
+</style>
+
+<p class="lead">自然栽培（無農薬・無肥料）で米を一年つくりきるための教科書です。田んぼ探しから種籾の準備、代かき、田植え、除草、水管理、出穂、稲刈り、秋起こしまでの全工程を、初めての方向けに順を追ってまとめています。</p>
+
+<p class="lead">あわせて、<b>あなたの田んぼに合わせた作業暦を自動でつくるツール</b>を用意しました。最寄りのアメダス観測地点を選ぶと、その地点の過去5年の実測気温から、田植え適期・出穂日・稲刈り日を積算温度で計算します。</p>
+
+<ul class="pts">
+<li>全国916地点のアメダスから、地名検索・現在地・一覧で最寄りを選べます</li>
+<li>田植え日と品種を選ぶと、もみまきから秋起こしまでの予定日が並びます</li>
+<li>印刷・PDF保存と、スマホのカレンダーへの取り込み（.ics）に対応</li>
+<li>その土地の気温から、向いている品種を判定します（自然栽培好適種を優先表示）</li>
+</ul>
+
+<div class="frame-wrap">
+<iframe id="inasakuFrame"
+  src="https://yusandonatural.github.io/inasaku/"
+  title="自然栽培の米作り 一年目の教科書 — 作業暦ツール"
+  allow="geolocation"
+  loading="lazy"></iframe>
+</div>
+
+<p class="fallback">うまく表示されない場合は <a href="https://yusandonatural.github.io/inasaku/" target="_blank" rel="noopener">こちらから直接ひらけます</a>。</p>
+
+<script>
+(function(){
+var ORIGIN = "https://yusandonatural.github.io";
+var f = document.getElementById("inasakuFrame");
+if(!f) return;
+window.addEventListener("message", function(e){
+if(e.origin !== ORIGIN) return;
+var d = e.data;
+if(!d || d.t !== "inasaku-h") return;
+var h = Number(d.h);
+if(h > 400 && h < 40000) f.style.height = (h + 40) + "px";
+});
+})();
+</script>
+</div>

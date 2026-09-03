@@ -3,7 +3,8 @@
 自然栽培（無農薬・無肥料）で米を一年つくりきるための教科書と、作業暦を自動生成するツールです。
 株式会社悠三堂 — https://yusando.com
 
-公開ページ: https://yusando.com/pages/inasaku-kyokasho
+公開ページ: https://yusandonatural.github.io/inasaku/
+Shopify: https://yusando.com/pages/inasaku-kyokasho （このページを iframe で読み込みます）
 
 ## できること
 
@@ -15,21 +16,51 @@
 
 | ファイル | 用途 |
 |---|---|
-| `index.html` | 単体で動くWebページ。GitHub Pages などにそのまま置けます |
+| `index.html` | トップ。ヒーロー＋教科書本編＋工程表ツール |
+| `sagyou.html` | 作業の手順（13工程の詳細解説） |
+| `hinshu.html` | 品種を選ぶ（28品種の比較表と自然栽培向き品種の解説） |
+| `nouki.html` | 農機具と予算（実売価格・中古相場・借りる選択肢） |
+| `genjou.html` | 日本の稲作の現状（統計とグラフ） |
+| `rekishi.html` | 日本の稲作の歴史（年表） |
+| `assets/site.css` | 全ページ共通のスタイル |
 | `amedas-chiten-data.html` | アメダス916地点の地点名・緯度経度・標高。`index.html` が読み込みます |
-| `shopify-page-body.html` | Shopify のページ本文に貼り付ける断片版（`<div id="inasaku-kyokasho">` から始まります） |
+| `shopify-embed-body.html` | Shopify のページ本文に貼る iframe 版 |
+| `shopify-page-body.html` | Shopify に全文を直接置く場合の断片版（旧構成・バックアップ） |
+| `_build/` | ページ生成スクリプト。下記参照 |
 
 `index.html` と `amedas-chiten-data.html` は必ず同じディレクトリに置いてください。
 
+## ページの直し方
+
+`index.html` 以外の5ページは `_build/` のスクリプトから生成しています。**HTMLを直接編集せず、`_build/` の中を直してから再生成してください。**
+
+```
+cd _build
+python3 build.py      # 5ページを書き出す
+```
+
+| スクリプト | 生成先 |
+|---|---|
+| `_build/shell.py` | 共通の枠（ヘッダー・ヒーローSVG・フッター）。全ページが使います |
+| `_build/chart.py` | 単一系列のSVGグラフ（棒・折れ線） |
+| `_build/p_genjou.py` 〜 `p_sagyou.py` | 各ページの本文 |
+| `_build/p_index.py` | `index.html` にヒーローと共通枠をかぶせる（一度だけ実行済み） |
+
+`index.html` は工程表ツールを含む大きなファイルなので、`p_index.py` は**一度だけ**適用する設計です（適用済みなら何もしません）。ツール本体を直すときは `index.html` を直接編集してください。
+
+## 配色とグラフ
+
+グラフは単一系列で、データ色は `#2e8b57` に固定しています。この色は色覚多様性のチェック（彩度・明度帯・背景コントラスト）を通したものです。複数系列にすると識別性の検証が必要になるため、量が違う指標は**必ず別のグラフに分けて**ください。2軸グラフは使いません。
+
 ## GitHub Pages で公開する
 
-1. このリポジトリの **Settings → Pages** を開く
-2. Source を **Deploy from a branch**、Branch を **main / (root)** にして Save
-3. 数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` で公開されます
+## Shopify との連携
 
-`.nojekyll` を置いてあるので Jekyll の処理は走りません。
+このリポジトリの GitHub Pages を本体とし、Shopify のページ本文は `shopify-embed-body.html` に置き換えます。iframe が `https://yusandonatural.github.io/inasaku/` を読み込むので、**このリポジトリを更新すれば Shopify のページも自動で新しくなります**。
 
-## Shopify 版との違い
+iframe の高さは、子ページから `postMessage` で実際の高さを親に伝えて自動調整しています。現在地の取得を iframe 内で使うため、iframe には `allow="geolocation"` を付けてあります。URL を変える場合は、`shopify-embed-body.html` の `src` と `ORIGIN` の2か所を揃えて直してください。
+
+## Shopify 断片版との違い
 
 Shopify のページ本文（`shopify-page-body.html`）では地点データを `/pages/amedas-chiten-data` から読み込みますが、単体版（`index.html`）は同じフォルダの `amedas-chiten-data.html` から読み込みます。この1行だけが違いです。
 
