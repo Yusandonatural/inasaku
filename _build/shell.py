@@ -2,8 +2,14 @@
 """共通の枠（ヘッダー・ヒーロー・フッター）。各ページはこれを使って組み立てる。"""
 
 SITE = "自然栽培の米作り 一年目の教科書"
+TAGLINE = "家族で食べるお米を、自然栽培で作る。"
+
+# 見出し用のしっぽり明朝（Google Fonts）
+FONTS = ("""<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&display=swap">""")
 BASE = "https://yusandonatural.github.io/inasaku/"
-BMC = "__BMC_ID__"   # Buy Me a Coffee のユーザー名が決まったら置換する
+BMC = "quietsheep"   # https://buymeacoffee.com/quietsheep
 
 NAV = [
     ("index.html",   "教科書トップ"),
@@ -59,15 +65,16 @@ def nav(page):
 
 def topbar(page):
     return ('<header class="topbar"><div class="topbar-in">'
-            '<a class="brand" href="index.html">%s<span class="txt">一年目の教科書</span></a>%s'
-            '</div></header>' % (MARK, nav(page)))
+            '<a class="brand" href="index.html">%s<span class="txt">一年目の教科書</span></a>'
+            '<span class="bar-tag">%s</span>%s'
+            '</div></header>' % (MARK, TAGLINE, nav(page)))
 
 
 SUPPORT = '''<section class="band alt"><div class="wrap read">
 <div class="support-box">
 <h3>この教科書は無料で公開しています</h3>
 <p>取材・データ整備・ツールの開発と更新は、すべて自費でやっています。役に立ったと感じていただけたら、コーヒー一杯分から応援していただけると励みになります。いただいたぶんは、品種データの拡充とサーバー費用にあてます。</p>
-<a class="bmc" href="https://www.buymeacoffee.com/{bmc}" target="_blank" rel="noopener noreferrer"><span>☕</span><span>コーヒーを一杯おごる</span></a>
+<a class="bmc" href="https://buymeacoffee.com/{bmc}" target="_blank" rel="noopener noreferrer"><span>☕</span><span>コーヒーを一杯おごる</span></a>
 <p class="support-note">Buy Me a Coffee のページへ移動します（別タブで開きます）。<br>もちろん、応援なしでもすべての内容をお使いいただけます。</p>
 </div>
 </div></section>'''.replace("{bmc}", BMC)
@@ -77,6 +84,7 @@ FOOT = '''<footer class="sitefoot"><div class="wrap">
 <div class="foot-grid">
 <div>
 <h4>この教科書について</h4>
+<p class="foot-tag">家族で食べるお米を、自然栽培で作る。</p>
 <p style="margin:0">農薬・化学肥料・除草剤を使わない米づくりの道しるべ。一年目の方が、田んぼ探しから稲刈りまでを一人でやりきれることを目指してまとめています。</p>
 </div>
 <div>
@@ -123,6 +131,7 @@ def page(fname, title, desc, body, page_key=None, extra_head=""):
 <meta property="og:description" content="{desc}">
 <meta property="og:site_name" content="{site}">
 <meta name="twitter:card" content="summary_large_image">
+{fonts}
 <link rel="stylesheet" href="assets/site.css">
 {extra}
 </head>
@@ -134,5 +143,5 @@ def page(fname, title, desc, body, page_key=None, extra_head=""):
 </body>
 </html>
 '''.format(title=title, desc=desc, base=BASE, fname=("" if fname == "index.html" else fname),
-           site=SITE, extra=extra_head, top=topbar(key), body=body, support=SUPPORT, foot=FOOT)
+           site=SITE, fonts=FONTS, extra=extra_head, top=topbar(key), body=body, support=SUPPORT, foot=FOOT)
     return html

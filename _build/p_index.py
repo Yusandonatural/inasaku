@@ -10,20 +10,20 @@ P = os.path.join(ROOT, "index.html")
 HERO = '''<section class="hero">
 <div class="hero-in">
 <div class="eyebrow">◎ 農薬・化学肥料・除草剤 不使用</div>
+<p class="tagline">家族で食べるお米を、自然栽培で作る。</p>
 <h1>一年目から、<br>ちゃんとお米は<span class="accent">穫れます</span>。</h1>
-<p class="sub">自然栽培で米を一年つくりきるための教科書です。田んぼ探しから種籾の準備、代かき、除草、稲刈りまで。最寄りのアメダス観測地点を選べば、その土地の実測気温から、あなたの田んぼの作業暦をつくります。</p>
+<p class="sub">自然栽培で米を一年つくりきるための教科書です。田んぼ探しから種籾の準備、代かき、除草、稲刈りまで。最寄りのアメダス観測地点を選べば、その土地の平年気温から、あなたの田んぼの作業暦をつくります。</p>
 <div class="hero-cta">
 <a class="btn btn-p" href="#tool">工程表をつくる</a>
 <a class="btn btn-g" href="sagyou.html">作業の手順を読む</a>
 </div>
 <div class="hero-stats">
-<div><b>916</b><span>連動するアメダス地点</span></div>
+<div><b>905</b><span>連動するアメダス地点</span></div>
 <div><b>13</b><span>工程の解説</span></div>
 <div><b>28</b><span>品種の適性判定</span></div>
-<div><b>5年</b><span>実測気温で計算</span></div>
+<div><b>30年</b><span>平年値で計算</span></div>
 </div>
 </div>
-''' + shell.HERO_ART + '''
 </section>
 
 <section class="band"><div class="wrap">

@@ -7,7 +7,7 @@ BODY = '''
 <section class="pagehead"><div class="wrap">
 <div class="kicker">TOOLS &amp; BUDGET</div>
 <h1>最初に買うべき農機具</h1>
-<p>1〜3反の自然栽培なら、いきなりトラクターは要りません。無農薬・無肥料なので防除機も肥料散布機も不要です。本当に要るものと、借りて済ませるもの、そして実際にいくらかかるのかを、実売価格で並べました。</p>
+<p>1〜3反の自然栽培なら、いきなりトラクターは要りません。無農薬・無肥料なので防除機も肥料散布機も不要です。本当に要るものと、借りて済ませるもの、そして実際にいくらかかるのかを、実売価格で並べました。家族4人の一年分なら1反で足ります（<a href="index.html#ryou" style="color:#f0d789">必要な広さの計算</a>）。</p>
 </div></section>
 
 <section class="band"><div class="wrap read">
