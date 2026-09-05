@@ -7,7 +7,7 @@ import shell
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = os.path.join(ROOT, "index.html")
 
-HERO = '''<section class="hero">
+HERO = '''<section class="tophero">
 <div class="hero-in">
 <div class="eyebrow">◎ 農薬・化学肥料・除草剤 不使用</div>
 <p class="tagline">家族で食べるお米を、自然栽培で作る。</p>

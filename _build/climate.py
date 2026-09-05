@@ -1,8 +1,18 @@
 # -*- coding: utf-8 -*-
 """気象庁「アメダス日別平年値(1991-2020年)」から、地点ごとの平年値ファイルを書き出す。
 
-  climate/<観測所番号>.json … その地点の日別平年値(気温0.1℃・降水量0.1mm、366日ぶん)
-  amedas-chiten-data.html    … 地点マスタ(都道府県|地点名,緯度,経度,標高,観測所番号;…)
+  climate/<番号の上2桁>.txt … その地域の地点の日別平年値をまとめたもの(1行1地点)
+  amedas-chiten-data.html   … 地点マスタ(都道府県|地点名,緯度,経度,標高,観測所番号;…)
+
+平年値は64進1文字を単位に詰めてあります。1行の形は
+  「観測所番号,気温367文字,降水72文字」
+  気温   = 1/1 の値だけ (0.1℃+400) を2文字。以降は前日との差を1文字
+           (0.1℃単位・32を足して符号なしに)。日別平年値の日々の差は
+           最大でも0.6℃なので1文字で足ります。
+  降水量 = 旬(10日ごと・年36旬)の日平均を 0.1mm 単位で2文字ずつ。
+           日別のままだと量が増えるわりに、使うのは期間合計だけなので旬で持つ。
+           降水の平年値がない地点は空。
+GitHubへ置きやすいよう、観測所番号の上2桁ごと(63ファイル)にまとめています。
 
 使い方:
   1. 気象庁の平年値ダウンロードページから normal_amedas_daily.zip を取得して展開
@@ -59,6 +69,37 @@ def read_normals(path):
             if vals[i + 1] == "8" and vals[i] != "":       # RMK 8 = 平年値あり
                 arr[OFF[mon - 1] + d] = int(vals[i])
     return T, P
+
+
+A64 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_"
+
+
+def enc2(v):
+    n = max(0, min(4095, int(v)))
+    return A64[n >> 6] + A64[n & 63]
+
+
+def enc_temp(vals):
+    """1日目は2文字、以降は前日との差を1文字。"""
+    out = [enc2(int(vals[0]) + 400)]
+    prev = int(vals[0])
+    for v in vals[1:]:
+        d = max(-32, min(31, int(v) - prev))
+        out.append(A64[d + 32])
+        prev += d
+    return "".join(out)
+
+
+def enc_rain(vals):
+    """旬(10日ごと・年36旬)の日平均を2文字ずつ。"""
+    out, i = [], 0
+    for m in range(12):
+        dim = DIM[m]
+        for a, b in ((0, 10), (10, 20), (20, dim)):
+            seg = [int(x) for x in vals[i + a:i + b]]
+            out.append(enc2(int(round(sum(seg) / float(len(seg))))))
+        i += dim
+    return "".join(out)
 
 
 def fill(a, need=360):
@@ -119,10 +160,9 @@ def main(extract, stations):
     if not os.path.isdir(OUT):
         os.makedirs(OUT)
     for f in os.listdir(OUT):
-        if f.endswith(".json"):
-            os.remove(os.path.join(OUT, f))
+        os.remove(os.path.join(OUT, f))
 
-    by_area, skipped = {}, []
+    by_area, clim, skipped = {}, {}, []
     for r in rows:
         no   = r["Station Number"]
         name = r["Station Name(Kanji)"]
@@ -134,15 +174,19 @@ def main(extract, stations):
             skipped.append(no + " " + name)
             continue
         p = fill(P.get(no), need=300)
-        io.open(os.path.join(OUT, no + ".json"), "w", encoding="utf-8").write(
-            json.dumps({"t": t, "p": p}, separators=(",", ":")))
+        clim.setdefault(no[:2], []).append(
+            no + "," + enc_temp(t) + "," + (enc_rain(p) if p else ""))
         pref = prefs.get((name, lat, lon)) or AREA.get(no[:2])
         if not pref:
             skipped.append(no + " " + name + "(都道府県不明)")
-            os.remove(os.path.join(OUT, no + ".json"))
+            clim[no[:2]].pop()
             continue
         by_area.setdefault(pref, []).append(
             "%s,%s,%s,%s,%s" % (name, ("%g" % lat), ("%g" % lon), alt, no))
+
+    for code in sorted(clim):
+        io.open(os.path.join(OUT, code + ".txt"), "w", encoding="utf-8").write(
+            "\n".join(sorted(clim[code])) + "\n")
 
     packed = "~".join(p + "|" + ";".join(by_area[p]) for p in ORDER if p in by_area)
     n = sum(len(v) for v in by_area.values())
@@ -152,7 +196,7 @@ def main(extract, stations):
 
 if __name__ == "__main__":
     n, sk, ln = main(sys.argv[1], sys.argv[2])
-    print("地点: %d ／ マスタ %d 文字 ／ climate/*.json を書き出しました" % (n, ln))
+    print("地点: %d ／ マスタ %d 文字 ／ climate/*.txt を書き出しました" % (n, ln))
     print("平年値が足りず除外: %d" % len(sk))
     for s in sk:
         print("  -", s)

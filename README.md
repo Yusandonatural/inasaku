@@ -3,10 +3,8 @@
 > 家族で食べるお米を、自然栽培で作る。
 
 自然栽培（無農薬・無肥料）で米を一年つくりきるための教科書と、作業暦を自動生成するツールです。
-株式会社悠三堂 — https://yusando.com
 
-公開ページ: https://yusandonatural.github.io/inasaku/
-Shopify: https://yusando.com/pages/inasaku-kyokasho （このページを iframe で読み込みます）
+公開ページ: https://inasaku.yusando.com/
 
 ## できること
 
@@ -28,7 +26,7 @@ Shopify: https://yusando.com/pages/inasaku-kyokasho （このページを iframe
 | `assets/hero.jpg` | トップのヒーロー背景（1600px・約230KB） |
 | `assets/hero-sp.jpg` | 同・スマホ用（900px・約90KB。幅640px以下で読み込み） |
 | `amedas-chiten-data.html` | アメダス905地点の地点名・緯度経度・標高・観測所番号。`index.html` が読み込みます |
-| `climate/<観測所番号>.json` | その地点の日別平年値（気温0.1℃・降水量0.1mmの整数、366日ぶん）。地点を選んだときに1ファイルだけ読み込みます |
+| `climate/<番号の上2桁>.txt` | 地域ごとにまとめた日別平年値（1行1地点・63ファイル）。地点を選んだときに1ファイルだけ読み込みます |
 | `shopify-embed-body.html` | Shopify のページ本文に貼る iframe 版 |
 | `shopify-page-body.html` | Shopify に全文を直接置く場合の断片版（旧構成・バックアップ） |
 | `_build/` | ページ生成スクリプト。下記参照 |
@@ -76,7 +74,14 @@ grep -h -E '^25,[ 0-9]+, *(0500|4000),' area*/*.csv > extract.txt
 python3 _build/climate.py extract.txt jma_station_active.csv
 ```
 
-30年ぶんの平年値がそろっていない新しい観測所（2026年時点で11地点）は、計算できないので地点一覧から外れます。ツール側は `climate/<観測所番号>.json` を1件だけ取得し、`{"t":[366個], "p":[366個]}` を日付ごとの気温・降水量に展開します。「気温が平年より±1℃の年」を平年値からずらして作り、収穫日の幅として表示しています。
+30年ぶんの平年値がそろっていない新しい観測所（2026年時点で11地点）は、計算できないので地点一覧から外れます。
+
+平年値は64進1文字を単位に詰めてあります。1行が「観測所番号,気温367文字,降水72文字」で1地点ぶん（約450バイト）。
+
+- **気温** — 1/1 の値だけ2文字（0.1℃の整数＋400）、以降は**前日との差を1文字**（0.1℃単位＋32）。日別平年値の日々の差は全国どこでも最大0.6℃なので1文字で足ります。復元は完全に元どおり（誤差0）。
+- **降水量** — 旬（10日ごと・年36旬）の日平均を2文字ずつ。日別のまま持つと量のわりに使い道がない（期間合計しか使わない）ためです。梅雨期の合計で最大3.6%のずれ。
+
+ファイルを地点ごとに分けると905個になってGitHubのウェブ画面からアップロードできないため、観測所番号の上2桁（＝地域）ごとに63ファイル（合計564KB・最大15KB）へまとめています。ツール側は選ばれた地点の地域ファイル1つだけを読み、`climDecT()` / `climDecR()` で366日ぶんに展開します。「気温が平年より±1℃の年」は平年値をずらして作り、収穫日の幅として表示しています。
 
 ## 動画
 
@@ -90,7 +95,7 @@ python3 _build/climate.py extract.txt jma_station_active.csv
 
 ## Shopify との連携
 
-このリポジトリの GitHub Pages を本体とし、Shopify のページ本文は `shopify-embed-body.html` に置き換えます。iframe が `https://yusandonatural.github.io/inasaku/` を読み込むので、**このリポジトリを更新すれば Shopify のページも自動で新しくなります**。
+このリポジトリの GitHub Pages を本体とし、Shopify 側のページ本文は `shopify-embed-body.html` に置き換えます。iframe が `https://inasaku.yusando.com/` を読み込むので、**このリポジトリを更新すれば Shopify のページも自動で新しくなります**。
 
 iframe の高さは、子ページから `postMessage` で実際の高さを親に伝えて自動調整しています。現在地の取得を iframe 内で使うため、iframe には `allow="geolocation"` を付けてあります。URL を変える場合は、`shopify-embed-body.html` の `src` と `ORIGIN` の2か所を揃えて直してください。
 
@@ -148,4 +153,4 @@ const STN_URL = "/pages/amedas-chiten-data";   // Shopify 版
 
 ## ライセンス
 
-コードの著作権は株式会社悠三堂に帰属します。気象庁のデータは出典明示のうえ自由に利用できます。
+コードの著作権は本サイトの発行者に帰属します。気象庁のデータは出典明示のうえ自由に利用できます。
