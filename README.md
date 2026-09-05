@@ -85,7 +85,7 @@ python3 _build/climate.py extract.txt jma_station_active.csv
 
 ## 動画
 
-トップの `#douga` に YUSANDO CHANNEL の再生リストを埋め込んでいます。読み込み時はサムネイル画像だけを置き、再生ボタンを押してはじめて `youtube-nocookie.com` の iframe を差し込む方式です（クリックするまでYouTubeへの通信もCookieも発生しません）。再生リストを変えるときは `index.html` の `#douga` セクションにある `PL...` の2か所（リンクとiframeのsrc）を直してください。
+トップの `#douga`（工程表ツールの下）に YUSANDO CHANNEL の動画を埋め込んでいます。読み込み時はサムネイル画像だけを置き、再生ボタンを押してはじめて `youtube-nocookie.com` の iframe を差し込む方式です（クリックするまでYouTubeへの通信もCookieも発生しません）。動画を差し替えるときは `index.html` の `#douga` セクションにある動画ID（サムネイルのURL2か所・リンク・iframeのsrc）と、`_build/shell.py` のフッターのリンクを直してください。
 
 ## 配色とグラフ
 
