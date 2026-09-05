@@ -15,6 +15,7 @@ HERO = '''<section class="tophero">
 <p class="sub">自然栽培で米を一年つくりきるための教科書です。田んぼ探しから種籾の準備、代かき、除草、稲刈りまで。最寄りのアメダス観測地点を選べば、その土地の平年気温から、あなたの田んぼの作業暦をつくります。</p>
 <div class="hero-cta">
 <a class="btn btn-p" href="#tool">工程表をつくる</a>
+<a class="btn btn-g" href="#douga">動画で見る</a>
 <a class="btn btn-g" href="sagyou.html">作業の手順を読む</a>
 </div>
 <div class="hero-stats">
